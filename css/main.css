@@ -1,0 +1,896 @@
+/* ==========================================================================
+ HTML5 Boilerplate styles - h5bp.com (generated via initializr.com)
+ ========================================================================== */
+
+html,
+button,
+input,
+select,
+textarea {
+	color: #222;
+}
+
+body {
+	font-size: 1em;
+	line-height: 1.4;
+}
+
+::-moz-selection {
+	background: #b3d4fc;
+	text-shadow: none;
+}
+
+::selection {
+	background: #b3d4fc;
+	text-shadow: none;
+}
+
+hr {
+	display: block;
+	height: 1px;
+	border: 0;
+	border-top: 1px solid #ccc;
+	margin: 1em 0;
+	padding: 0;
+}
+
+img {
+	vertical-align: middle;
+}
+
+fieldset {
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+
+textarea {
+	resize: vertical;
+}
+
+.chromeframe {
+	margin: 0.2em 0;
+	background: #ccc;
+	color: #000;
+	padding: 0.2em 0;
+}
+
+
+/* ===== Initializr Styles ==================================================
+ Author: Jonathan Verrecchia - verekia.com/initializr/responsive-template
+ ========================================================================== */
+
+body {
+	font: 13px/26px Helvetica, Helvetica Neue, Arial;
+}
+
+.wrapper {
+	width: 90%;
+	margin: 0 5%;
+}
+
+/* ==============
+	MOBILE: Menu
+ ============== */
+
+nav ul {
+	margin: 0;
+	padding: 0;
+}
+
+nav a {
+	display: block;
+	margin-bottom: 10px;
+	padding: 15px 0;
+
+	text-align: center;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+nav a:hover,
+nav a:visited {
+}
+
+nav a:hover {
+}
+
+/* ==============
+	MOBILE: Main
+ ============== */
+
+.main {
+	padding: 30px 0;
+}
+
+.main article h1 {
+	font-size: 2em;
+}
+
+.main aside {
+	color: white;
+	padding: 0px 5% 10px;
+}
+
+.footer-container footer {
+	padding: 20px 0;
+}
+
+/* ===============
+	ALL: IE Fixes
+ =============== */
+
+.ie7 .title {
+	padding-top: 20px;
+}
+
+/* ==========================================================================
+ Author's custom styles
+ ========================================================================== */
+
+
+* {
+	transition: width .4s;
+	-moz-transition: width .4s; /* Firefox 4 */
+	-webkit-transition: width .4s; /* Safari and Chrome */
+	-o-transition: width .4s; /* Opera */
+	text-decoration: none;
+}
+
+html, body {
+	height: 100%;
+}
+
+h2 {
+	font-family: Titillium;
+	font-size: 49px;
+}
+
+header {
+	width: -webkit-calc(100% - 200px);
+	width: calc(100% - 200px);
+	float: left;
+	height: 50px;
+	background-color: #2c2c2c;
+	background-image: -moz-linear-gradient(top, #333333, #222222);
+	background-image: -ms-linear-gradient(top, #333333, #222222);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#333333), to(#222222));
+	background-image: -webkit-linear-gradient(top, #333333, #222222);
+	background-image: -o-linear-gradient(top, #333333, #222222);
+	background-image: linear-gradient(top, #333333, #222222);
+	background-repeat: repeat-x;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#333333', endColorstr='#222222', GradientType=0);
+	-webkit-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.25);
+	-moz-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.25);
+	box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.25);
+	color: #eee;
+	z-index: 400;
+	box-shadow: 0 0 40px rgba(0,0,0,.75);
+	position: relative;
+}
+
+header h1 {
+	letter-spacing: 1px;
+	font-size: 49px;
+	font-family: Titillium;
+	font-weight: normal;
+	margin: 8px 40px;
+	display: inline-block;
+}
+
+header div.seperate {
+	background: #141414;
+	width: 1px;
+	height: 50px;
+	border-right: 1px solid #333;
+	display: inline-block;
+}
+
+header nav {
+	width: -webkit-calc(100% - 263px);
+	width: calc(100% - 263px);
+	padding-top: 10px;
+}
+
+header nav ul li {
+	width: 30%;
+	text-align: center;
+	display: inline-block;
+	float: right;
+	max-width: 225px;
+}
+
+header nav ul li:first-of-type {
+	width: 40%;
+	max-width: 300px;
+}
+
+.cupid-green {
+	background-color: #7fbf4d;
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #7fbf4d), color-stop(100%, #63a62f));
+	background-image: -webkit-linear-gradient(top, #7fbf4d, #63a62f);
+	background-image: -moz-linear-gradient(top, #7fbf4d, #63a62f);
+	background-image: -ms-linear-gradient(top, #7fbf4d, #63a62f);
+	background-image: -o-linear-gradient(top, #7fbf4d, #63a62f);
+	background-image: linear-gradient(top, #7fbf4d, #63a62f);
+	border: 1px solid #63a62f;
+	border-bottom: 1px solid #5b992b;
+	border-radius: 3px;
+	-webkit-box-shadow: inset 0 1px 0 0 #96ca6d;
+	box-shadow: inset 0 1px 0 0 #96ca6d;
+	color: #fff;
+	font: bold 11px/1 "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
+	padding: 7px 0 8px 0;
+	text-align: center;
+	text-shadow: 0 -1px 0 #4c9021;
+	width: 130px;
+	display: inline-block !important;
+	float: none !important;
+}
+.cupid-green:hover {
+	background-color: #76b347;
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #76b347), color-stop(100%, #5e9e2e));
+	background-image: -webkit-linear-gradient(top, #76b347, #5e9e2e);
+	background-image: -moz-linear-gradient(top, #76b347, #5e9e2e);
+	background-image: -ms-linear-gradient(top, #76b347, #5e9e2e);
+	background-image: -o-linear-gradient(top, #76b347, #5e9e2e);
+	background-image: linear-gradient(top, #76b347, #5e9e2e);
+	-webkit-box-shadow: inset 0 1px 0 0 #8dbf67;
+	box-shadow: inset 0 1px 0 0 #8dbf67;
+	cursor: pointer;
+}
+.cupid-green:active {
+	border: 1px solid #5b992b;
+	border-bottom: 1px solid #538c27;
+	-webkit-box-shadow: inset 0 0 8px 4px #548c29, 0 1px 0 0 #eeeeee;
+	box-shadow: inset 0 0 8px 4px #548c29, 0 1px 0 0 #eeeeee;
+}
+
+#search {
+	background: url(/img/search.png) no-repeat 10px 6px #fcfcfc;
+	border: 1px solid #d1d1d1;
+	font: normal 12px Arial,Helvetica,Sans-serif;
+	width: 125px;
+	padding: 6px 15px 6px 35px;
+	border-radius: 3px;
+	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+	-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+}
+
+aside#sidekick {
+	width: 200px;
+	background: rgb(235, 240, 243);
+	height: 100%;
+	float: right;
+	font-size: 15px;
+	z-index: 500;
+	position: relative;
+}
+
+div#side-content {
+	padding: 20px;
+	font-size: 13px;
+}
+
+div#credits {
+	color: #888;
+	font-size: 12px;
+	text-align: center;
+	height: 80px;
+	width: 200px;
+	position: absolute;
+	bottom: 0;
+	border-top: 1px solid rgb(255,255,255);
+	padding-top: 35px;
+	box-shadow: 0 0 6px rgba(0,0,0,.2);
+}
+
+section#left, section#right {
+	width: -webkit-calc(50% - 102px);
+	width: calc(50% - 102px);
+	height: -webkit-calc(100% - 50px);
+	height: calc(100% - 50px);
+	float: left;
+	display: none;
+}
+
+section#left {
+	background-image: url(/img/background/fabric.jpg);
+	box-shadow: 10px 0 40px rgba(0,0,0,.4) inset;
+}
+
+div#middle {
+	width: 4px;
+	background: rgba(255,255,255,.75);
+	height: -webkit-calc(100% - 50px);
+	height: calc(100% - 50px);
+	float: left;
+}
+
+div#middle:hover {
+	cursor: ew-resize;
+}
+
+section#right {
+	background-image: url(/img/background/sky.jpg);
+	background-size: auto 100%;
+	box-shadow: -10px 0 40px rgba(0,0,0,.4) inset;
+	overflow: hidden;
+}
+
+#left h2, #right h2 {
+	margin: 40px;
+	text-shadow: 2px 2px 0px #ff0, -2px -2px 0px #f0f, -2px 2px 0px #0ff, 2px -2px 0px #0f0, 0px 0px 50px #000;
+}
+
+#left h2 {
+	color: #83f481;
+	/*text-shadow: 0 0 10px rgba(0,0,0,.6);*/
+}
+
+#right h2 {
+	color: white;
+	/*text-shadow: 0 0 10px rgba(0,0,0,.6);*/
+}
+
+#left ul {
+	border-radius: 5px;
+	box-shadow: 0 0 10px rgba(0,0,0,.6);
+	overflow: hidden;
+	margin: 0 40px;
+	padding: 0;
+}
+
+#left ul li:last-child {
+	border-bottom: none;
+}
+
+li.listitem {
+	box-shadow: 0 0 5px rgba(0,0,0,.2);
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+	-khtml-user-drag: element;
+	font-size: 14px;
+	transition: opacity .2s linear, height .4s linear, padding .4s linear;
+	overflow: hidden;
+	list-style: none;
+	border-bottom: 1px solid white;
+	background: #eee;
+	padding: 7px 20px;
+}
+
+.dropperContainer {
+	position: relative;
+	margin: 10px auto;
+	width: 22%;
+	height: 200px;
+	z-index: 1;
+	margin-left: 40px;
+	margin-bottom: 40px;
+	display: inline-block;
+}
+.dropperContainer {
+	-webkit-perspective: 1000px;
+}
+
+div.itemDropper {
+	width: 100%;
+	height: 100%;
+	-webkit-transform-style: preserve-3d;
+	-webkit-transition: all .4s linear;
+	border-radius: 5px;
+	border: 3px solid white;
+	box-shadow: 0 0 10px rgba(0,0,0,.6);
+	background: #eee;
+}
+
+div.itemDropper > * {
+	display: block;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	-webkit-backface-visibility: hidden;
+}
+
+div.itemDropper img {
+	height: 64px;
+	width: 64px;
+	display: block;
+}
+
+.dropperContainer.dropped:hover div.itemDropper {
+	-webkit-transform: rotateY(180deg);
+}
+
+div.itemDropper ul.back {
+	-webkit-transform: rotateY(180deg);
+}
+
+li.listitem:hover {
+	background: #ccc;
+	cursor: pointer;
+}
+
+li.listitem.active {
+	background: #888;
+}
+
+li.listitem.invisible {
+  opacity: 0;
+	height: 0;
+	padding: 0 20px;
+}
+
+li.listitem.hidden {
+  display: none;
+}
+
+#userinfo{
+padding: 8px;
+text-align: right;
+font-size: 13px;
+position: relative;
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+}
+#userinfo.in{
+min-height: 64px;
+}
+#userinfo.in span#greeting{
+font-size: 18px;
+display: block;
+margin-top: 2px;
+margin-bottom: -6px;
+}
+#userinfo img{
+padding: 4px;
+border: 1px #BBBBBB solid;
+box-shadow: 0 0 6px rgba(0,0,0,.1);
+height: 32px;
+width: 32px;
+left: 8px;
+bottom: -4px;
+position: absolute;
+background: white;
+}
+#scroll div.spacer{
+height: 10px;
+position: relative;
+}
+
+#sidekick #friends {
+padding: 5px 10px;
+}
+#sidekick #reload {
+cursor: pointer;
+float: right;
+}
+div.user {
+border: 0 solid transparent;
+text-shadow: none;
+background: white;
+position: relative;
+color: black;
+padding: 5px 10px;
+box-shadow: 0 0px 6px rgba(0,0,0,.1);
+display: block;
+overflow: hidden;
+transition: box-shadow .15s ease-in-out;
+-moz-transition: box-shadow .15s ease-in-out;
+-webkit-transition: box-shadow .15s ease-in-out;
+cursor: pointer;
+}
+div.user:last-child {
+margin: 0px;
+}
+div.user img {
+position: absolute;
+right: 10px;
+top: 6px;
+height: 16px;
+width: 16px;
+}
+div.chat {
+width: 230px;
+position: fixed;
+bottom: 0px;
+z-index: 9999;
+box-shadow: 0 0 12px rgba(0,0,0,.25);
+overflow: hidden;
+}
+div.chat.minimized {
+	height: 24px !important;
+}
+div.chat .infolabel {
+height: 20px;
+background: #6eb23b;
+padding: 2px 8px;
+color: white;
+box-shadow: 0 6px 16px -10px black;
+position: relative;
+z-index: 2;
+}
+div.chat .infolabel div {
+display: inline;
+background: rgba(255, 255, 255, .2);
+padding: 0px 3px;
+font-weight: bold;
+right: 8px;
+top: 0px;
+position: absolute;
+cursor: pointer;
+border-bottom-left-radius: 2px;
+border-bottom-right-radius: 2px;
+}
+div.chat .infolabel div:hover {
+background: rgba(255,255,255,.4);
+box-shadow: 0 0 6px rgba(0,0,0,.05);
+}
+div.chat .notes {
+background: white;
+min-height: 196px;
+padding-top: 4px;
+padding-bottom: 4px;
+}
+.text {
+width: 180px;
+background-color: white;
+padding: 4px 16px 4px 8px;
+overflow: hidden;
+position: relative;
+border-bottom: 1px solid #6EB23B;
+margin-bottom: 8px;
+}
+.text:first-child {
+margin-top: 4px;
+}
+.text:last-child {
+margin-bottom: 4px;
+}
+.text.new {
+background: #CBE86A;
+}
+.text.right {
+margin-left: 26px;
+padding: 4px 8px 4px 16px;
+border-bottom: 1px solid #282828;
+}
+.text.right.new {
+background: #B4B4B4;
+}
+.text .profile {
+height: 100%;
+width: 8px;
+background: #6EB23B;
+position: absolute;
+right: 0;
+top: 0;
+}
+.text.right .profile {
+background: #282828;
+margin-right: 8px;
+left: 0;
+}
+.chat textarea {
+overflow: hidden;
+height: 32px;
+outline: none;
+resize: none;
+font-family: "lucida sans", tahoma, verdana, calibri, arial;
+width: 222px;
+font-size: 12px;
+margin: 0px;
+padding: 2px 4px;
+background: rgb(40,40,40);
+border: none;
+color: white;
+}
+.chat textarea:hover, .chat textarea:focus {
+border: 0;
+box-shadow: none;
+}
+
+/* ==========================================================================
+ Media Queries
+ ========================================================================== */
+
+@media only screen and (min-width: 480px) {
+
+/* ====================
+	INTERMEDIATE: Menu
+ ==================== */
+
+	nav a {
+			float: left;
+			width: 27%;
+			margin: 0 1.7%;
+			padding: 25px 2%;
+			margin-bottom: 0;
+	}
+
+	nav li:first-child a {
+			margin-left: 0;
+	}
+
+	nav li:last-child a {
+			margin-right: 0;
+	}
+
+/* ========================
+	INTERMEDIATE: IE Fixes
+ ======================== */
+
+	nav ul li {
+			display: inline;
+	}
+
+	.oldie nav a {
+			margin: 0 0.7%;
+	}
+}
+
+@media only screen and (min-width: 768px) {
+
+/* ============
+	WIDE: Menu
+ ============ */
+
+	.title {
+			float: left;
+	}
+
+	nav {
+			float: right;
+			width: 38%;
+	}
+
+/* ============
+	WIDE: Main
+ ============ */
+
+	.main article {
+			float: left;
+			width: 57%;
+	}
+
+	.main aside {
+			float: right;
+			width: 28%;
+	}
+}
+
+@media only screen and (min-width: 1140px) {
+
+/* ===============
+	Maximal Width
+ =============== */
+
+	.wrapper {
+			width: 1026px; /* 1140px - 10% for margins */
+			margin: 0 auto;
+	}
+}
+
+/* ==========================================================================
+ Helper classes
+ ========================================================================== */
+
+.ir {
+	background-color: transparent;
+	border: 0;
+	overflow: hidden;
+	*text-indent: -9999px;
+}
+
+.ir:before {
+	content: "";
+	display: block;
+	width: 0;
+	height: 150%;
+}
+
+.hidden {
+	display: none !important;
+	visibility: hidden;
+}
+
+.visuallyhidden {
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+}
+
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
+	clip: auto;
+	height: auto;
+	margin: 0;
+	overflow: visible;
+	position: static;
+	width: auto;
+}
+
+.invisible {
+	visibility: hidden;
+}
+
+.clearfix:before,
+.clearfix:after {
+	content: " ";
+	display: table;
+}
+
+.clearfix:after {
+	clear: both;
+}
+
+.clearfix {
+	*zoom: 1;
+}
+
+/* ==========================================================================
+ Print styles
+ ========================================================================== */
+
+@media print {
+	* {
+			background: transparent !important;
+			color: #000 !important; /* Black prints faster: h5bp.com/s */
+			box-shadow: none !important;
+			text-shadow: none !important;
+	}
+
+	a,
+	a:visited {
+			text-decoration: underline;
+	}
+
+	a[href]:after {
+			content: " (" attr(href) ")";
+	}
+
+	abbr[title]:after {
+			content: " (" attr(title) ")";
+	}
+
+	/*
+	 * Don't show links for images, or javascript/internal links
+	 */
+
+	.ir a:after,
+	a[href^="javascript:"]:after,
+	a[href^="#"]:after {
+			content: "";
+	}
+
+	pre,
+	blockquote {
+			border: 1px solid #999;
+			page-break-inside: avoid;
+	}
+
+	thead {
+			display: table-header-group; /* h5bp.com/t */
+	}
+
+	tr,
+	img {
+			page-break-inside: avoid;
+	}
+
+	img {
+			max-width: 100% !important;
+	}
+
+	@page {
+			margin: 0.5cm;
+	}
+
+	p,
+	h2,
+	h3 {
+			orphans: 3;
+			widows: 3;
+	}
+
+	h2,
+	h3 {
+			page-break-after: avoid;
+	}
+}
+
+/* ==========================================================================
+ User fonts
+ ========================================================================== */
+
+@font-face {
+    font-family: 'Titillium';
+    src: url('/fonts/Titillium/TitilliumText25L001-webfont.eot');
+    src: url('/fonts/Titillium/TitilliumText25L001-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/Titillium/TitilliumText25L001-webfont.woff') format('woff'),
+         url('/fonts/Titillium/TitilliumText25L001-webfont.ttf') format('truetype'),
+         url('/fonts/Titillium/TitilliumText25L001-webfont.svg#TitilliumText25L800wt') format('svg');
+    font-weight: bold;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'Titillium';
+    src: url('/fonts/Titillium/TitilliumText25L002-webfont.eot');
+    src: url('/fonts/Titillium/TitilliumText25L002-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/Titillium/TitilliumText25L002-webfont.woff') format('woff'),
+         url('/fonts/Titillium/TitilliumText25L002-webfont.ttf') format('truetype'),
+         url('/fonts/Titillium/TitilliumText25L002-webfont.svg#TitilliumText25L600wt') format('svg');
+    font-weight: 600;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'Titillium';
+    src: url('/fonts/Titillium/TitilliumText25L003-webfont.eot');
+    src: url('/fonts/Titillium/TitilliumText25L003-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/Titillium/TitilliumText25L003-webfont.woff') format('woff'),
+         url('/fonts/Titillium/TitilliumText25L003-webfont.ttf') format('truetype'),
+         url('/fonts/Titillium/TitilliumText25L003-webfont.svg#TitilliumText25L400wt') format('svg');
+    font-weight: 400;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'Titillium';
+    src: url('/fonts/Titillium/TitilliumText25L004-webfont.eot');
+    src: url('/fonts/Titillium/TitilliumText25L004-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/Titillium/TitilliumText25L004-webfont.woff') format('woff'),
+         url('/fonts/Titillium/TitilliumText25L004-webfont.ttf') format('truetype'),
+         url('/fonts/Titillium/TitilliumText25L004-webfont.svg#TitilliumText25L250wt') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'Titillium';
+    src: url('/fonts/Titillium/TitilliumText25L005-webfont.eot');
+    src: url('/fonts/Titillium/TitilliumText25L005-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/Titillium/TitilliumText25L005-webfont.woff') format('woff'),
+         url('/fonts/Titillium/TitilliumText25L005-webfont.ttf') format('truetype'),
+         url('/fonts/Titillium/TitilliumText25L005-webfont.svg#TitilliumText25L1wt') format('svg');
+    font-weight: 200;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'Titillium';
+    src: url('/fonts/Titillium/TitilliumText25L-webfont.eot');
+    src: url('/fonts/Titillium/TitilliumText25L-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/Titillium/TitilliumText25L-webfont.woff') format('woff'),
+         url('/fonts/Titillium/TitilliumText25L-webfont.ttf') format('truetype'),
+         url('/fonts/Titillium/TitilliumText25L-webfont.svg#TitilliumText25L999wt') format('svg');
+    font-weight: bolder;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'Rokkitt';
+    src: url('/fonts/rokkitt/Rokkitt-webfont.eot');
+    src: url('/fonts/rokkitt/Rokkitt-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/rokkitt/Rokkitt-webfont.woff') format('woff'),
+         url('/fonts/rokkitt/Rokkitt-webfont.ttf') format('truetype'),
+         url('/fonts/rokkitt/Rokkitt-webfont.svg#RokkittRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
