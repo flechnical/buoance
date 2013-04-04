@@ -1,6 +1,6 @@
 <?php
 
-require_once './comps/constants.php';
+require_once '../comps/constants.php';
 
 $student = $_POST['stud'];
 $items = $_POST['items'];
