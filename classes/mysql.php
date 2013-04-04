@@ -1,6 +1,6 @@
 <?php
 
-require_once '/comps/constants.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/comps/constants.php';
 
 class mysql{
 	
