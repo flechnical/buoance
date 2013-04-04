@@ -98,10 +98,11 @@ function startDrag(e, clicked) {
 	e.dataTransfer.setDragImage(canvasImage, 0, 0);
 }
 var theone = '';
+var lastitem = '';
 var mouse_is_inside = false;
 document.onclick = function() {
 	if (!mouse_is_inside) {
-		activeItems = document.getElementsByClassName('listitem active');
+		var activeItems = document.getElementsByClassName('listitem active');
 		while (activeItems.length > 0)
 			activeItems[0].className = 'listitem';
 	}
@@ -122,18 +123,35 @@ function doFirst() {
 			}
 		};
 		item[i].onmouseout = function() {
-			if (hasClass(this, 'active')) {
-				mouse_is_inside = false;
-			}
+			mouse_is_inside = false;
 		};
 		item[i].onmousedown = function(e) {
 			var index = this.dataset.index;
 			theone = index;
 			mouse_is_inside = true;
 		};
-		item[i].onclick = function() {
-			this.className = (hasClass(this, 'active')) ? 'listitem' : 'listitem active';
-		};
+		(function(index){
+			item[i].onclick = function(e) {
+				var activeItems = document.getElementsByClassName('listitem active');
+				if (!e.ctrlKey) {
+					while (activeItems.length > 0)
+						activeItems[0].className = 'listitem';
+					if (e.shiftKey) {
+						if (lastitem < index) {
+							for (s = lastitem; s < index; s++) {
+								item[s].className = 'listitem active';
+							}
+						} else {
+							for (s = lastitem; s > index; s--) {
+								item[s].className = 'listitem active';
+							}							
+						}
+					}
+				}
+				this.className = (hasClass(this, 'active')) ? 'listitem' : 'listitem active';
+				if (!e.shiftKey && hasClass(this, 'active')) lastitem = index;
+			};
+		})(i);
 	}
 	document.getElementById('left').style.display = 'block';
 	document.getElementById('right').style.display = 'block';
