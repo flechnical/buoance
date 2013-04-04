@@ -14,4 +14,4 @@ define('dbpass', 'db_password');
 define('db1', 'db_name');
 ?>
 
---replace the db_... with your data--
+--replace db_... with your data--
