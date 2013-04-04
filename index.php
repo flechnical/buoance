@@ -71,10 +71,12 @@ include('comps/usersession.php');
 		<h2>Sponsoren</h2>
 		<ul>
 			<?php
-				$mysql = mysql_connect("localhost", "root", "moving_the_web")
+				require_once 'comps/constants.php';
+			
+				$mysql = mysql_connect(dbserver, dbuser, dbpass)
 				or die ("Es konnte keine Verbindung zu MySQL hergestellt werden.");
 
-				mysql_select_db("buoance")
+				mysql_select_db(db1)
 				or die ("Es konnte keine Verbindung zur Datenbank hergestellt werden.");
 				
 				mysql_query("SET NAMES 'utf8'");

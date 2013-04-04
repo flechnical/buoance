@@ -1,11 +1,13 @@
 <?php
 
+require_once './comps/constants.php';
+
 class mysql{
 	
 	private $conn;
 	
 	function __construct(){
-		$this->conn = new mysqli('localhost', 'root', 'moving_the_web', 'buoance') or die('Ein Problem mit der Datenbank ist aufgetreten.');
+		$this->conn = new mysqli(dbserver, dbuser, dbpass, db1) or die('Ein Problem mit der Datenbank ist aufgetreten.');
 	}
 	
 	function login($un, $pwd){
