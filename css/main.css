@@ -321,16 +321,16 @@ section#right {
 
 #left h2, #right h2 {
 	margin: 40px;
-	text-shadow: 2px 2px 0px #ff0, -2px -2px 0px #f0f, -2px 2px 0px #0ff, 2px -2px 0px #0f0, 0px 0px 50px #000;
 }
 
 #left h2 {
 	color: #83f481;
-	/*text-shadow: 0 0 10px rgba(0,0,0,.6);*/
+	text-shadow: 0 0 10px rgba(0,0,0,.6);
 }
 
 #right h2 {
 	color: white;
+	text-shadow: 2px 2px 0px #ff0, -2px -2px 0px #f0f, -2px 2px 0px #0ff, 2px -2px 0px #0f0, 0px 0px 50px #000;
 	/*text-shadow: 0 0 10px rgba(0,0,0,.6);*/
 }
 
@@ -414,8 +414,16 @@ li.listitem:hover {
 	cursor: pointer;
 }
 
+li.listitem:active {
+	background: rgb(0, 117, 224);
+	color: white;
+	border-bottom: 1px solid blue;
+}
+
 li.listitem.active {
-	background: #888;
+	background: rgb(0, 117, 224);
+	color: white;
+	border-bottom: 1px solid blue;
 }
 
 li.listitem.invisible {
