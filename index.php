@@ -66,6 +66,13 @@ include('comps/usersession.php');
 		</div>
 	</aside>
 	
+	<div id="wrapper">
+	<div id="cinema"><div id="c_table">
+		<div>
+			<h2>Loading...</h2>
+			<img src="img/loader.gif" alt="loader.gif" />
+		</div>
+	</div></div>
 	<section id="left" class="clearfix">
 	<div class="scroll">
 		<h2>Sponsoren</h2>
@@ -104,12 +111,14 @@ include('comps/usersession.php');
 		?>
 	</div>
 	</section>
+	</div>
 	
 	<script src="http://buoance_chat_test.jit.su/socket.io/socket.io.js"></script> <!-- online: http://buoance.eu01.aws.af.cm / lokal: http://localhost:8000 -->
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
 	<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
 
+	<script src="js/base.js"></script>
 	<script src="js/slimscroll.js"></script>
 	<script src="js/dragndrop.js"></script>
 	<script src="js/plugins.js"></script>

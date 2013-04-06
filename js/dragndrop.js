@@ -126,7 +126,7 @@ function doFirst() {
 			mouse_is_inside = false;
 		};
 		item[i].onmousedown = function(e) {
-			var index = this.dataset.index;
+			var index = (this.dataset) ? this.dataset.index : this.getAttribute('data-index');
 			theone = index;
 			mouse_is_inside = true;
 		};
@@ -155,6 +155,8 @@ function doFirst() {
 	}
 	document.getElementById('left').style.display = 'block';
 	document.getElementById('right').style.display = 'block';
+	closeCinema();
+	// hier den loader wieder schließen, weil alle Funktionen geladen sind // vllt. noch ausbauen auf guten loader mit Sachen die ueberprueft werden sollen // Modul ... fertig geladen // wenn array durchgegangen fertig
 }
 
 window.addEventListener('load', doFirst, false);
