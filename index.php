@@ -26,13 +26,13 @@ include('comps/usersession.php');
 	<![endif]-->
 
 	<header class="clearfix">
-		<h1 class="title"><img src="img/scool.png" height="30px" alt="s'Cool Ball" /></h1>
+		<h1 class="title"><a href="/" class="ajaxlink"><img src="img/scool.png" height="30px" alt="s'Cool Ball" /></a></h1>
 		<div class="seperate"></div>
 		<nav>
 			<ul>
 					<li><input type="text" id="search" placeholder="Suchbegriff eingeben..." /></li>
-					<li><a href="#bearbeitung" class="cupid-green">Bearbeitung</a></li>
-					<li><a href="#zuteilung" class="cupid-green">Zuteilung</a></li>
+					<li><a href="bearbeitung" class="ajaxlink cupid-green">Bearbeitung</a></li>
+					<li><a href="zuteilung" class="ajaxlink cupid-green">Zuteilung</a></li>
 			</ul>
 		</nav>
 	</header>
@@ -40,8 +40,7 @@ include('comps/usersession.php');
 	<aside id="sidekick">
 		<?php include('comps/userinfo.php'); ?>
 		<?php
-		if (isset($_SESSION['name']))
-		{
+		if (isset($_SESSION['name'])) {
 		?>
 		<div id="freunde">
 			<div id="friends">
@@ -67,50 +66,23 @@ include('comps/usersession.php');
 	</aside>
 	
 	<div id="wrapper">
-	<div id="cinema"><div id="c_table">
-		<div>
-			<h2>Loading...</h2>
-			<img src="img/loader.gif" alt="loader.gif" />
-		</div>
-	</div></div>
-	<section id="left" class="clearfix">
-	<div class="scroll">
-		<h2>Sponsoren</h2>
-		<ul>
-			<?php
-				require_once 'comps/constants.php';
+		<div id="cinema"><div id="c_table">
+			<div>
+				<h2>Loading...</h2>
+				<img src="img/loader.gif" alt="loader.gif" />
+			</div>
+		</div></div>
+		<div id="content">
 			
-				$mysql = mysql_connect(dbserver, dbuser, dbpass)
-				or die ("Es konnte keine Verbindung zu MySQL hergestellt werden.");
-
-				mysql_select_db(db1)
-				or die ("Es konnte keine Verbindung zur Datenbank hergestellt werden.");
-				
-				mysql_query("SET NAMES 'utf8'");
-				$sponsoren = mysql_query("SELECT * FROM sponsoren WHERE student IS NULL OR student = '' ORDER BY `plz` ASC, `firmenname` ASC") or die(mysql_error());
-				
-				while ($sponsor = mysql_fetch_assoc($sponsoren)) {
-					echo '<li draggable="true" class="listitem" data-index="', $sponsor['id'], '">', $sponsor['firmenname'], ' - ', $sponsor['strasse'], ' - ', $sponsor['plz'], ' - ', $sponsor['ort'], '</li>';
+			<?php
+				if (isset($_GET['location'])) {
+					include 'sites/'.$_GET['location'];
+				} else {
+					include 'sites/index.php';
 				}
 			?>
-		</ul>
-	</div>
-	</section>
-	<div id="middle"></div>
-	<section id="right" class="clearfix">
-	<div class="scroll">
-		<h2>Schüler</h2>
-		<?php
-			$students = mysql_query("SELECT * FROM students ORDER BY `plz` ASC, `klasse` ASC, `nachname` ASC") or die(mysql_error());
 			
-			while ($student = mysql_fetch_assoc($students)) {
-				echo '<div class="dropperContainer"><div class="itemDropper" data-index="', $student['id'], '"><div class="front"><img src="', ($student['avatar'] == '0') ? 'img/user' : 'http://dl.dropbox.com/u/21062820/avatar/'.$student['id'], '.png" alt="Avatar" />', $student['nachname'], ' ', $student['vorname'], '</div></div></div>';
-			}
-			
-			mysql_close($mysql);
-		?>
-	</div>
-	</section>
+		</div>
 	</div>
 	
 	<script src="http://buoance_chat_test.jit.su/socket.io/socket.io.js"></script> <!-- online: http://buoance.eu01.aws.af.cm / lokal: http://localhost:8000 -->
@@ -121,6 +93,7 @@ include('comps/usersession.php');
 	<script src="js/base.js"></script>
 	<script src="js/slimscroll.js"></script>
 	<script src="js/dragndrop.js"></script>
+	<script src="js/ajaxurl.js"></script>
 	<script src="js/plugins.js"></script>
 	<script src="js/main.js"></script>
 

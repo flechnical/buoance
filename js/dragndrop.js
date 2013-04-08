@@ -153,10 +153,6 @@ function doFirst() {
 			};
 		})(i);
 	}
-	document.getElementById('left').style.display = 'block';
-	document.getElementById('right').style.display = 'block';
 	closeCinema();
 	// hier den loader wieder schließen, weil alle Funktionen geladen sind // vllt. noch ausbauen auf guten loader mit Sachen die ueberprueft werden sollen // Modul ... fertig geladen // wenn array durchgegangen fertig
 }
-
-window.addEventListener('load', doFirst, false);
