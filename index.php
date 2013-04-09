@@ -93,9 +93,9 @@ include('comps/usersession.php');
 	<script src="js/base.js"></script>
 	<script src="js/slimscroll.js"></script>
 	<script src="js/dragndrop.js"></script>
-	<script src="js/ajaxurl.js"></script>
 	<script src="js/plugins.js"></script>
 	<script src="js/main.js"></script>
+	<script src="js/ajaxurl.js"></script>
 
 	<script>
 		var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
