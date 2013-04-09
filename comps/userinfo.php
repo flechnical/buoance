@@ -12,7 +12,7 @@
 		
 	echo '<div id="userinfo" class="out">';
 		echo '<img src="img/user.png" alt="Gastaccount" title="Sie sind nicht angemeldet und haben daher nur einen Gastaccount." />';
-		echo '<a class="login" href="/login">Anmelden</a><br /><a class="signup" href="/signup">Registrieren</a>';
+		echo '<a class="login ajaxlink" href="/login">Anmelden</a><br /><a class="signup ajaxlink" href="/signup">Registrieren</a>';
 	echo '</div>';
 		
 	}

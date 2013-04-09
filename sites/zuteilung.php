@@ -3,7 +3,7 @@
 		<h2>Sponsoren</h2>
 		<ul>
 			<?php
-				require_once '../comps/constants.php';
+				require_once $_SERVER['DOCUMENT_ROOT'].'/comps/constants.php';
 			
 				$mysql = mysql_connect(dbserver, dbuser, dbpass)
 				or die ("Es konnte keine Verbindung zu MySQL hergestellt werden.");

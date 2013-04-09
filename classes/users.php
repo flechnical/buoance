@@ -19,10 +19,10 @@ class users{
 			$mysql->getData($_SESSION['name']);
 			
 			if(isset($_SESSION['ref'])){
-				header("location: ".$_SESSION['ref']);
+				header('location: '.$_SESSION['ref']);
 			}
 			else{
-				header("location: /");
+				header('location: /');
 			}
 			
 		}
@@ -55,7 +55,7 @@ class users{
 	function userconfirm(){
 	
 		session_start();
-		if($_SESSION['status'] != 'angemeldet') header("location: /");
+		if($_SESSION['status'] != 'angemeldet') header('location: /');
 	
 	}
 
