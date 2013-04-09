@@ -11,6 +11,7 @@ function startScript() {
 			xhr.onreadystatechange = function() {
 				if (xhr.readyState == 4 && xhr.status == 200) {
 					document.getElementById('content').innerHTML = xhr.responseText;
+					loadFunctions();
 				}
 			};
 			if (pageurl != window.location) {
@@ -31,7 +32,7 @@ function startScript() {
 			// }
 		// };
 	// };
-	doFirst();
+	loadFunctions(); // wenn Seite geladen und ajax-script geladen
 }
 
 window.onload = startScript();

@@ -1,3 +1,7 @@
+function loadFunctions() {
+	initDragListeners();
+	initSlimScroll();
+}
 function closeCinema() {
 	var wrapperItems = document.querySelectorAll('div#wrapper > *');
 	for (i = 0; i < wrapperItems.length; i++) {

@@ -85,6 +85,34 @@ function closeChat(partnerid, username) {
 	index--;
 }
 
+function initSlimScroll() {
+	
+	fensterhoehe = $(window).height();
+	$('section, section .scroll, section div.slimScrollDiv').height(fensterhoehe-50+'px');
+	$('section .scroll').slimScroll({
+		height: fensterhoehe-50+'px',
+		alwaysVisible: true,
+		distance: '0',
+		opacity: .6,
+		color: '#000',
+		size: '10px'
+	});
+	
+	$(window).resize(function(){
+		fensterhoehe = $(window).height();
+		$('section, section .scroll, section div.slimScrollDiv').height(fensterhoehe-50+'px');
+		$('section .scroll').slimScroll({
+			height: fensterhoehe-50+'px',
+			alwaysVisible: true,
+			distance: '0',
+			opacity: .6,
+			color: '#000',
+			size: '10px'
+		});
+	});
+	
+}
+
 var socket;
 
 $(function() {
@@ -144,29 +172,5 @@ $(function() {
 		});
 		
 	}
-	
-	fensterhoehe = $(window).height();
-	$('section, section .scroll, section div.slimScrollDiv').height(fensterhoehe-50+'px');
-	$('section .scroll').slimScroll({
-		height: fensterhoehe-50+'px',
-		alwaysVisible: true,
-		distance: '0',
-		opacity: .6,
-		color: '#000',
-		size: '10px'
-	});
-	
-	$(window).resize(function(){
-		fensterhoehe = $(window).height();
-		$('section, section .scroll, section div.slimScrollDiv').height(fensterhoehe-50+'px');
-		$('section .scroll').slimScroll({
-			height: fensterhoehe-50+'px',
-			alwaysVisible: true,
-			distance: '0',
-			opacity: .6,
-			color: '#000',
-			size: '10px'
-		});
-	});
 	
 });

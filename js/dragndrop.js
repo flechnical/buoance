@@ -107,7 +107,7 @@ document.onclick = function() {
 			activeItems[0].className = 'listitem';
 	}
 };
-function doFirst() {
+function initDragListeners() {
 	dropper = document.getElementsByClassName('itemDropper');
 	for (i = 0; i < dropper.length; i++) {
 		dropper[i].addEventListener('dragenter', function(e) { e.preventDefault(); }, false);
