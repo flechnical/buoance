@@ -537,8 +537,8 @@ div#middle:hover {
 }
 
 section#right {
-	background-image: url(/img/background/sky.jpg);
-	background-size: auto 100%;
+	background-image: url(/img/background/wood.png);
+	/*background-size: auto 100%;*/
 	box-shadow: -10px 0 40px rgba(0,0,0,.4) inset;
 	overflow: hidden;
 }
