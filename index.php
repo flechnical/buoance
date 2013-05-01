@@ -15,6 +15,7 @@ include('comps/usersession.php');
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<link rel="stylesheet" href="css/normalize.min.css">
+	<link rel="stylesheet" href="css/nanoscroller.css">
 	<link rel="stylesheet" href="css/main.css">
 	<link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
 
@@ -25,10 +26,10 @@ include('comps/usersession.php');
 	<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
 	<![endif]-->
 
-	<header class="clearfix">
+	<header id="mainheader" class="clearfix">
 		<h1 class="title"><a href="/" class="ajaxlink"><img src="img/scool.png" height="30px" alt="s'Cool Ball" /></a></h1>
 		<div class="seperate"></div>
-		<nav>
+		<nav id="menu">
 			<ul>
 					<li><input type="text" id="search" placeholder="Suchbegriff eingeben..." /></li>
 					<li><a href="bearbeitung" class="ajaxlink cupid-green">Bearbeitung</a></li>
@@ -47,8 +48,19 @@ include('comps/usersession.php');
 				Kontakte
 			</div>
 			<div id="connected">
+				<div class="user testuser1 new">
+					<div class="chatlabel" onclick="openChat('45', 'testuser1')">
+						testuser1<div>1</div><span></span>
+					</div>
+					<div class="chat 45"><div class="nano"><div class="notes content"></div></div><textarea name="text" onkeydown="return valChat(event, '45', 'testuser1');"></textarea></div>
+				</div>
+				<div class="user nikc95 new">
+					<div class="chatlabel" onclick="openChat('46', 'nikc95')">
+						nikc95<div>45</div><span></span>
+					</div>
+					<div class="chat 46"><div class="nano"><div class="notes content"></div></div><textarea name="text" onkeydown="return valChat(event, '46', 'nikc95');"></textarea></div>
+				</div>
 			</div>
-			<div class="spacer"></div>
 		</div>
 		<?php
 		}
@@ -85,17 +97,18 @@ include('comps/usersession.php');
 		</div>
 	</div>
 	
-	<script src="http://buoance_chat_test.jit.su/socket.io/socket.io.js"></script> <!-- online: http://buoance.eu01.aws.af.cm / lokal: http://localhost:8000 -->
+	<script src="http://buoance_chat.jit.su/socket.io/socket.io.js"></script> <!-- online: http://buoance.eu01.aws.af.cm / lokal: http://localhost:8000 -->
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
 	<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
 
 	<script src="js/base.js"></script>
-	<script src="js/slimscroll.js"></script>
+	<script src="js/nanoscroller.js"></script>
 	<script src="js/dragndrop.js"></script>
 	<script src="js/plugins.js"></script>
+	<script src="js/crossbrowser.js"></script>
 	<script src="js/main.js"></script>
-	<script src="js/ajaxurl.js"></script>
+	<script src="js/pageload.js"></script>
 
 	<script>
 		var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];

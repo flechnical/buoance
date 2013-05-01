@@ -1,5 +1,5 @@
-<section id="main">
-	<div class="scroll">
+<section id="main" class="nano">
+	<div class="content">
 		<h2>Testseite</h2>
 		<p>
 			Das ist die Startseite/Willkommenspage.

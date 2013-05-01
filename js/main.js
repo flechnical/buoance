@@ -12,7 +12,7 @@
 	// }
 // }
 
-function valChat(e, partnerid) {
+function valChat(e, partnerid, username) {
 	if (!e) var e = window.event;
 	if (e.keyCode) code = e.keyCode;
 	else if (e.which) code = e.which;
@@ -20,38 +20,32 @@ function valChat(e, partnerid) {
 		if (e.shiftKey === true) {
 			return true;
 		} else {
-			sendChat(partnerid);
+			sendChat(partnerid, username);
 			return false;
 		}
 	}
 }
 
-function sendChat(partnerid) {
-	text = $('.chat.'+partnerid+' textarea').val();
-	date = Math.round(+new Date()/1000);
-	socket.emit('sendchat', text, partnerid);
-	$('.chat.'+partnerid+' .notes').append('<b>'+session['name']+'</b>: '+date+' - '+text+'<br />');
+function sendChat(partnerid, partnername) {
+	var daten = new Array(); // 0 => Text, 1 => Datum, 2 => partnerid, 3 => partnername
+	daten[0] = $('.chat.'+partnerid+' textarea').val();
+	daten[1] = Math.round(+new Date()/1000);
+	daten[2] = session['userid'];
+	daten[3] = session['name'];
+	socket.emit('sendchat', daten);
+	$('.chat.'+partnerid+' .notes').append('<div class="text right new" title="'+daten[1]+'"><div title="'+daten[3]+'" class="profile"></div>'+daten[0]+'</div>');
+	$('.text.new').animate({backgroundColor: '#ffffff'}, 2000).removeClass('new');
 	$('.chat.'+partnerid+' textarea').val('');
+	$('.chat.'+partnerid+' .nano').nanoScroller({preventPageScrolling: true, scroll: 'bottom'});
 }
 
-index = 0;
+var chats = new Array();
 
 function openChat(partnerid, username) {
 	// resetCounter(partnerid, username);
-	if ($('.chat.'+partnerid).length == 0) {
-		$('body').append('<div class="chat '+partnerid+'" data-index="'+index+'"><div class="infolabel">'+username+'<div onclick="closeChat('+partnerid+', \''+username+'\');">X</div></div><div class="slimscroller"><div class="notes"></div></div><textarea name="text" onkeydown="return valChat(event, '+partnerid+');"></textarea></div>');
-		$('.chat.'+partnerid).slideDown(200);
-		texthoehe = $('.chat.'+partnerid+' textarea').outerHeight();
+	if (chats[partnerid] == undefined || chats[partnerid] == false) {
 		$('.chat.'+partnerid+' textarea').focus();
-		$('.chat.'+partnerid+' .slimscroller, .chat.'+partnerid+' div.slimScrollDiv').height(240-texthoehe+'px');
-		$('.chat.'+partnerid).height('264px');
-		$('.chat.'+partnerid+' .slimscroller').slimScroll({height:240-texthoehe+'px'});
-		$('.chat.'+partnerid).css('left', index*240+120+'px');
-		index++;
-		
-		$('div.infolabel').click(function() {
-			$(this).parent().toggleClass('minimized');
-		});
+		$('.chat.'+partnerid+' .nano').nanoScroller({preventPageScrolling: true, scroll: 'bottom'});
 		
 		if (session['userid'] < partnerid) {
 			var id1 = session['userid'];
@@ -61,10 +55,12 @@ function openChat(partnerid, username) {
 			var id2 = session['userid'];
 		}
 		socket.emit('addroom', id1+'-'+id2, partnerid);
+		chats[partnerid] = true;
 		// getChat(partnerid, username);
 	} else {
-		$('.chat.'+partnerid).height('264px');
+		chats[partnerid] = false;
 	}
+	$('.user.'+username).toggleClass('max');
 }
 
 function closeChat(partnerid, username) {
@@ -85,35 +81,79 @@ function closeChat(partnerid, username) {
 	index--;
 }
 
-function initSlimScroll() {
+function initNanoScroller() {
 	
-	fensterhoehe = $(window).height();
-	$('section, section .scroll, section div.slimScrollDiv').height(fensterhoehe-50+'px');
-	$('section .scroll').slimScroll({
-		height: fensterhoehe-50+'px',
-		alwaysVisible: true,
-		distance: '0',
-		opacity: .6,
-		color: '#000',
-		size: '10px'
-	});
+	// fensterhoehe = $(window).height();
+	// $('section, section .content').height(fensterhoehe-50+'px');
+	// $('section .scroll').slimScroll({
+		// height: fensterhoehe-50+'px',
+		// alwaysVisible: true,
+		// distance: '0',
+		// opacity: .6,
+		// color: '#000',
+		// size: '10px'
+	// });
+	$('.nano').nanoScroller();
+	$('.dropped .nano').nanoScroller({preventPageScrolling: true});
 	
 	$(window).resize(function(){
-		fensterhoehe = $(window).height();
-		$('section, section .scroll, section div.slimScrollDiv').height(fensterhoehe-50+'px');
-		$('section .scroll').slimScroll({
-			height: fensterhoehe-50+'px',
-			alwaysVisible: true,
-			distance: '0',
-			opacity: .6,
-			color: '#000',
-			size: '10px'
-		});
+		// fensterhoehe = $(window).height();
+		// $('section, section .content').height(fensterhoehe-50+'px');
+		// $('section .scroll').slimScroll({
+			// height: fensterhoehe-50+'px',
+			// alwaysVisible: true,
+			// distance: '0',
+			// opacity: .6,
+			// color: '#000',
+			// size: '10px'
+		// });
+		$('.nano').nanoScroller();
+		$('.dropped .nano').nanoScroller({preventPageScrolling: true});
+	});
+	
+	$('.dropped').hover(function() {
+		$(this).find('.back').animate({'top': '0'}, 400);
+	}, function() {
+		$(this).find('.back').animate({'top': '194px'}, 400);
 	});
 	
 }
 
 var socket;
+
+function socketVerbinden() {
+	
+	socket = io.connect('http://buoance_chat.jit.su'); // online: http://buoance.eu01.aws.af.cm / lokal: http://localhost:8000
+	
+	// on connection to server, ask for user's name with an anonymous callback
+	socket.on('connect', function(){
+		// call the server-side function 'adduser' and send one parameter (value of prompt)
+		socket.emit('adduser', session['userid'], session['name']);
+	});
+	
+	// listener, whenever the server emits 'updatechat', this updates the chat body
+	socket.on('updatechat', function(data) {
+		$('.chat.'+data[2]+' .notes').append('<div class="text new" title="'+data[1]+'"><div title="'+data[3]+'" class="profile"></div>'+data[0]+'</div>');
+		$('.chat.'+data[2]+' .nano').nanoScroller({preventPageScrolling: true, scroll: 'bottom'});
+		$('.text.new').animate({backgroundColor: '#ffffff'}, 2000).removeClass('new');
+	}); /* username durch die partnerid ersetzen / nur Daten von anderen mit updatechat holen */
+			/* Zusammenstellung von sendchat.php */
+	
+	socket.on('updateconsole', function(data) {
+		console.log(data);
+	});
+	
+	// listener, whenever the server emits 'updateusers', this updates the username list
+	socket.on('updateusers', function(data) {
+		$('span.online').removeClass('online');
+		$.each(data, function(key, value) {
+			if (key != session['userid']) {
+				$('.user.'+value+' .chatlabel span').addClass('online');
+			}
+		});
+	});
+	
+}
 
 $(function() {
 	
@@ -138,39 +178,5 @@ $(function() {
 	/*
 		Pruefen ob der User angemeldet ist (mit session) hat nicht funktioniert
 	*/
-	
-	function socketVerbinden() {
-		
-		socket = io.connect('http://buoance_chat_test.jit.su'); // online: http://buoance.eu01.aws.af.cm / lokal: http://localhost:8000
-		
-		// on connection to server, ask for user's name with an anonymous callback
-		socket.on('connect', function(){
-			// call the server-side function 'adduser' and send one parameter (value of prompt)
-			socket.emit('adduser', session['userid'], session['name']);
-		});
-		
-		// listener, whenever the server emits 'updatechat', this updates the chat body
-		socket.on('updatechat', function(chatid, data) {
-			if (chatid != session['userid']) { // ueberfluessig?
-				$('.chat.'+chatid+' .notes').append('<b>'+chatid + ':</b> ' + data + '<br />');
-			}
-		}); /* username durch die partnerid ersetzen / nur Daten von anderen mit updatechat holen */
-				/* Zusammenstellung von sendchat.php */
-		
-		socket.on('updateconsole', function(data) {
-			console.log(data);
-		});
-		
-		// listener, whenever the server emits 'updateusers', this updates the username list
-		socket.on('updateusers', function(data) {
-			$('#connected').empty();
-			$.each(data, function(key, value) {
-				if (key != session['userid']) {
-					$('#connected').append('<div class="user '+value+' new" onclick="openChat(\''+key+'\', \''+value+'\')">'+key+' - '+value+'<img src="/img/green.png" alt="on" /></div>');
-				}
-			});
-		});
-		
-	}
 	
 });

@@ -1,6 +1,6 @@
 function loadFunctions() {
 	initDragListeners();
-	initSlimScroll();
+	initNanoScroller();
 }
 function closeCinema() {
 	var wrapperItems = document.querySelectorAll('div#wrapper > *');
@@ -9,4 +9,7 @@ function closeCinema() {
 		wrapperItems[i].style.filter = 'none';
 	}
 	document.getElementById('cinema').style.display = 'none';
+}
+function hasClass(element, cls) {
+	return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
 }

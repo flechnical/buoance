@@ -61,7 +61,8 @@ textarea {
  ========================================================================== */
 
 body {
-	font: 13px/26px Helvetica, Helvetica Neue, Arial;
+	font-size: 13px;
+	font-family: Helvetica, Helvetica Neue, Arial;
 }
 
 .wrapper {
@@ -86,13 +87,6 @@ nav a {
 	text-align: center;
 	text-decoration: none;
 	font-weight: bold;
-}
-
-nav a:hover,
-nav a:visited {
-}
-
-nav a:hover {
 }
 
 /* ==============
@@ -128,22 +122,36 @@ nav a:hover {
  standard styles
  ========================================================================== */
 
-* {
+/** {
 	transition: width .4s;
-	-moz-transition: width .4s; /* Firefox 4 */
-	-webkit-transition: width .4s; /* Safari and Chrome */
-	-o-transition: width .4s; /* Opera */
+	-moz-transition: width .4s;
+	-webkit-transition: width .4s;
+	-o-transition: width .4s;
 	text-decoration: none;
-}
+}*/
 
 html, body {
 	height: 100%;
 	/* width: 100%; nice animation on startup */
 }
 
+body {
+	overflow: hidden;
+	line-height: 23px;
+}
+
 h2 {
 	font-family: Titillium;
 	font-size: 49px;
+}
+
+a {
+	text-decoration: none;
+	color: grey;
+}
+
+a:hover {
+	color: #222;
 }
 
 /* ==========================================================================
@@ -164,12 +172,9 @@ header {
 	background-image: linear-gradient(top, #333333, #222222);
 	background-repeat: repeat-x;
 	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#333333', endColorstr='#222222', GradientType=0);
-	-webkit-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.25);
-	-moz-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.25);
-	box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.25);
 	color: #eee;
 	z-index: 400;
-	box-shadow: 0 0 40px rgba(0,0,0,.75);
+	/*box-shadow: 0 0 40px rgba(0,0,0,.75);*/
 	position: relative;
 }
 
@@ -194,6 +199,7 @@ header nav {
 	width: -webkit-calc(100% - 263px);
 	width: calc(100% - 263px);
 	padding-top: 10px;
+	float: right;
 }
 
 header nav ul li {
@@ -268,12 +274,23 @@ header nav ul li:first-of-type {
 
 aside#sidekick {
 	width: 200px;
-	background: rgb(235, 240, 243);
+	background: white;
 	height: 100%;
 	float: right;
 	font-size: 15px;
 	z-index: 500;
-	position: relative;
+	top: 0;
+	right: 0;
+	position: absolute;
+}
+
+aside#sidekick:before {
+	content: '';
+	background: url(/img/background/squares.png);
+	opacity: .5;
+	height: 100%;
+	width: 100%;
+	position: absolute;
 }
 
 div#side-content {
@@ -338,66 +355,74 @@ float: right;
 div.user {
 border: 0 solid transparent;
 text-shadow: none;
-background: white;
 position: relative;
-color: black;
-padding: 5px 10px;
 box-shadow: 0 0px 6px rgba(0,0,0,.1);
 display: block;
 overflow: hidden;
-transition: box-shadow .15s ease-in-out;
--moz-transition: box-shadow .15s ease-in-out;
--webkit-transition: box-shadow .15s ease-in-out;
-cursor: pointer;
+transition: height .15s ease-in-out;
+-moz-transition: height .15s ease-in-out;
+-webkit-transition: height .15s ease-in-out;
+	height: 35px;
+}
+div.user.max {
+	height: 275px;
 }
 div.user:last-child {
 margin: 0px;
 }
-div.user img {
+div.user .chatlabel {
+	cursor: pointer;
+	padding: 5px 10px;
+	position: relative;
+	z-index: 10;
+	background: white;
+	box-shadow: 0 0 10px rgba(0,0,0,.2);
+	border-bottom: 2px solid rgb(164,211,166);
+}
+div.user .chatlabel div {
+	font-family: Tahoma; -webkit-font-smoothing: antialiased; text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
+	font-weight: bold;
+	margin: 0;
+	position: absolute;
+	height: auto;
+	width: auto;
+	color: #f5f5f5;
+	background: #cc0000;
+	background: -moz-linear-gradient(top,#dd0000 0,#cc0000,100%); background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#dd0000),color-stop(100%,#cc0000)); filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#dd0000',endColorstr='#cc0000',GradientType=0);
+	border-bottom-right-radius: 60px; border-bottom-left-radius: 60px;
+	border: 1px solid rgba(0,0,0,0.50);
+	box-shadow: 0px 1px 3px rgba(0,0,0,0.35), inset 0px 1px 1px rgba(255,255,255,0.50); -webkit-box-shadow: 0px 1px 3px rgba(0,0,0,0.35), inset 0px 1px 1px rgba(255,255,255,0.50); -moz-box-shadow: 0px 1px 3px rgba(0,0,0,0.35), inset 0px 1px 1px rgba(255,255,255,0.50); -o-box-shadow: 0px 1px 3px rgba(0,0,0,0.35), inset 0px 1px 1px rgba(255,255,255,0.50);
+	z-index: 1;
+	font-size: 8px;
+	top: 0;
+	right: 34px;
+	padding: 0.5px 2.5px 1px 2px;
+	opacity: .75;
+	line-height: normal;
+}
+div.user .chatlabel span {
 position: absolute;
+display: block;
 right: 10px;
 top: 6px;
 height: 16px;
 width: 16px;
+	background: url(/img/grey.png);
+}
+div.user .chatlabel span.online {
+	background: url(/img/green.png);
 }
 div.chat {
-width: 230px;
-position: fixed;
-bottom: 0px;
-z-index: 9999;
-box-shadow: 0 0 12px rgba(0,0,0,.25);
-overflow: hidden;
-}
-div.chat.minimized {
-	height: 24px !important;
-}
-div.chat .infolabel {
-height: 20px;
-background: #6eb23b;
-padding: 2px 8px;
-color: white;
-box-shadow: 0 6px 16px -10px black;
-position: relative;
-z-index: 2;
-}
-div.chat .infolabel div {
-display: inline;
-background: rgba(255, 255, 255, .2);
-padding: 0px 3px;
-font-weight: bold;
-right: 8px;
-top: 0px;
 position: absolute;
-cursor: pointer;
-border-bottom-left-radius: 2px;
-border-bottom-right-radius: 2px;
+bottom: 0;
+overflow: hidden;
+background: white;
 }
-div.chat .infolabel div:hover {
-background: rgba(255,255,255,.4);
-box-shadow: 0 0 6px rgba(0,0,0,.05);
+div.chat .nano {
+	height: 204px;
+	width: 200px;
 }
 div.chat .notes {
-background: white;
 min-height: 196px;
 padding-top: 4px;
 padding-bottom: 4px;
@@ -527,8 +552,7 @@ section#left {
 div#middle {
 	width: 4px;
 	background: rgba(255,255,255,.75);
-	height: -webkit-calc(100% - 50px);
-	height: calc(100% - 50px);
+	height: 100%;
 	float: left;
 }
 
@@ -554,8 +578,8 @@ section#right {
 
 #right h2 {
 	color: white;
-	text-shadow: 2px 2px 0px #ff0, -2px -2px 0px #f0f, -2px 2px 0px #0ff, 2px -2px 0px #0f0, 0px 0px 50px #000;
-	/*text-shadow: 0 0 10px rgba(0,0,0,.6);*/
+	/*text-shadow: 2px 2px 0px #ff0, -2px -2px 0px #f0f, -2px 2px 0px #0ff, 2px -2px 0px #0f0, 0px 0px 50px #000;*/
+	text-shadow: 0 0 10px rgba(0,0,0,.6);
 }
 
 #left ul {
@@ -577,7 +601,6 @@ li.listitem {
 	-webkit-user-select: none;
 	user-select: none;
 	-khtml-user-drag: element;
-	font-size: 14px;
 	transition: opacity .2s linear, height .4s linear, padding .4s linear;
 	overflow: hidden;
 	list-style: none;
@@ -588,27 +611,39 @@ li.listitem {
 
 .dropperContainer {
 	position: relative;
-	margin: 10px auto;
+	margin: 10px auto 40px 40px;
 	width: 22%;
 	height: 200px;
 	z-index: 1;
-	margin-left: 40px;
-	margin-bottom: 40px;
 	display: inline-block;
+	overflow: hidden;
+	border: 3px solid white;
+	border-radius: 5px;
+	box-shadow: 0 0 10px rgba(0,0,0,.6);
+	background: #eee;
+	font-size: 11px;
 }
-.dropperContainer {
+
+.dropperContainer ul li.listitem {
+	padding: 4px;
+}
+
+/*.dropperContainer {
 	-webkit-perspective: 1000px;
+}*/
+
+div.borderer {
+	height: 6px;
+	width: 100%;
+	background: rgb(0, 117, 224);
+	box-shadow: 0 0 10px rgba(0,0,0,.2);
 }
 
 div.itemDropper {
 	width: 100%;
 	height: 100%;
-	-webkit-transform-style: preserve-3d;
-	-webkit-transition: all .4s linear;
-	border-radius: 5px;
-	border: 3px solid white;
-	box-shadow: 0 0 10px rgba(0,0,0,.6);
-	background: #eee;
+	/*-webkit-transform-style: preserve-3d;
+	-webkit-transition: all .4s linear;*/
 }
 
 div.itemDropper > * {
@@ -616,8 +651,8 @@ div.itemDropper > * {
 	position: absolute;
 	width: 100%;
 	height: 100%;
-	-webkit-backface-visibility: hidden;
 }
+	/*-webkit-backface-visibility: hidden;*/
 
 div.itemDropper img {
 	height: 64px;
@@ -625,12 +660,27 @@ div.itemDropper img {
 	display: block;
 }
 
-.dropperContainer.dropped:hover div.itemDropper {
+/*.dropperContainer.dropped:hover div.itemDropper {
 	-webkit-transform: rotateY(180deg);
+}*/
+
+/*div.itemDropper div.back {
+	-webkit-transform: rotateY(180deg);
+}*/
+
+div.front {
+	height: 194px;
 }
 
-div.itemDropper ul.back {
-	-webkit-transform: rotateY(180deg);
+div.back {
+	height: 194px;
+	top: 194px;
+	background: #eee;
+}
+
+div.back ul {
+	margin: 0;
+	padding: 0;
 }
 
 li.listitem:hover {
