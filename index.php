@@ -14,12 +14,12 @@ include('comps/usersession.php');
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<link rel="stylesheet" href="css/normalize.min.css">
-	<link rel="stylesheet" href="css/nanoscroller.css">
-	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="/css/normalize.min.css">
+	<link rel="stylesheet" href="/css/nanoscroller.css">
+	<link rel="stylesheet" href="/css/main.css">
 	<link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
 
-	<script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+	<script src="/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 </head>
 <body>
 	<!--[if lt IE 7]>
@@ -27,13 +27,13 @@ include('comps/usersession.php');
 	<![endif]-->
 
 	<header id="mainheader" class="clearfix">
-		<h1 class="title"><a href="/" class="ajaxlink"><img src="img/scool.png" height="30px" alt="s'Cool Ball" /></a></h1>
+		<h1 class="title"><a href="/" class="ajaxlink"><img src="/img/scool.png" height="30px" alt="s'Cool Ball" /></a></h1>
 		<div class="seperate"></div>
 		<nav id="menu">
 			<ul>
 					<li><input type="text" id="search" placeholder="Suchbegriff eingeben..." /></li>
-					<li><a href="bearbeitung" class="ajaxlink cupid-green">Bearbeitung</a></li>
-					<li><a href="zuteilung" class="ajaxlink cupid-green">Zuteilung</a></li>
+					<li><a href="/bearbeitung" class="ajaxlink cupid-green">Bearbeitung</a></li>
+					<li><a href="/zuteilung" class="ajaxlink cupid-green">Zuteilung</a></li>
 			</ul>
 		</nav>
 	</header>
@@ -54,9 +54,15 @@ include('comps/usersession.php');
 					</div>
 					<div class="chat 45"><div class="nano"><div class="notes content"></div></div><textarea name="text" onkeydown="return valChat(event, '45', 'testuser1');"></textarea></div>
 				</div>
+				<div class="user testuser2 new">
+					<div class="chatlabel" onclick="openChat('47', 'testuser2')">
+						testuser2<div>2</div><span></span>
+					</div>
+					<div class="chat 47"><div class="nano"><div class="notes content"></div></div><textarea name="text" onkeydown="return valChat(event, '47', 'testuser2');"></textarea></div>
+				</div>
 				<div class="user nikc95 new">
 					<div class="chatlabel" onclick="openChat('46', 'nikc95')">
-						nikc95<div>45</div><span></span>
+						Nikc95<div>45</div><span></span>
 					</div>
 					<div class="chat 46"><div class="nano"><div class="notes content"></div></div><textarea name="text" onkeydown="return valChat(event, '46', 'nikc95');"></textarea></div>
 				</div>
@@ -72,7 +78,7 @@ include('comps/usersession.php');
 			Kommunikation
 		</div>
 		<div id="credits">
-			<img src="img/buoance.png" width="120px" alt="buoance" /><br />
+			<img src="/img/buoance.png" width="120px" alt="buoance" /><br />
 			&copy; 03.2013
 		</div>
 	</aside>
@@ -81,13 +87,15 @@ include('comps/usersession.php');
 		<div id="cinema"><div id="c_table">
 			<div>
 				<h2>Loading...</h2>
-				<img src="img/loader.gif" alt="loader.gif" />
+				<img src="/img/loader.gif" alt="loader.gif" />
 			</div>
 		</div></div>
 		<div id="content">
 			
 			<?php
-				if (isset($_GET['location'])) {
+				if (!isset($_SESSION['status'])) {
+					include 'sites/login.php';
+				} else if (isset($_GET['location'])) {
 					include 'sites/'.$_GET['location'];
 				} else {
 					include 'sites/index.php';
@@ -100,15 +108,15 @@ include('comps/usersession.php');
 	<script src="http://buoance_chat.jit.su/socket.io/socket.io.js"></script> <!-- online: http://buoance.eu01.aws.af.cm / lokal: http://localhost:8000 -->
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
-	<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+	<script>window.jQuery || document.write('<script src="/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
 
-	<script src="js/base.js"></script>
-	<script src="js/nanoscroller.js"></script>
-	<script src="js/dragndrop.js"></script>
-	<script src="js/plugins.js"></script>
-	<script src="js/crossbrowser.js"></script>
-	<script src="js/main.js"></script>
-	<script src="js/pageload.js"></script>
+	<script src="/js/base.js"></script>
+	<script src="/js/nanoscroller.js"></script>
+	<script src="/js/dragndrop.js"></script>
+	<script src="/js/plugins.js"></script>
+	<script src="/js/crossbrowser.js"></script>
+	<script src="/js/main.js"></script>
+	<script src="/js/pageload.js"></script>
 
 	<script>
 		var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];

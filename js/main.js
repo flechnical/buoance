@@ -94,7 +94,6 @@ function initNanoScroller() {
 		// size: '10px'
 	// });
 	$('.nano').nanoScroller();
-	$('.dropped .nano').nanoScroller({preventPageScrolling: true});
 	
 	$(window).resize(function(){
 		// fensterhoehe = $(window).height();
@@ -108,13 +107,52 @@ function initNanoScroller() {
 			// size: '10px'
 		// });
 		$('.nano').nanoScroller();
-		$('.dropped .nano').nanoScroller({preventPageScrolling: true});
+		leftwidth = $('#left').outerWidth();
+		$('#middle div').css('left', leftwidth);
 	});
 	
-	$('.dropped').hover(function() {
-		$(this).find('.back').animate({'top': '0'}, 400);
-	}, function() {
-		$(this).find('.back').animate({'top': '194px'}, 400);
+	lastopen = 1;
+	$('.dropped .itemDropper .student').click(function(){
+		hasTheClass = $(this).siblings('.firms').hasClass('lastopen');
+		$(this).siblings('.firms').slideToggle().addClass('lastopen');
+		if (lastopen != 1 && !hasTheClass) {
+			lastopen.slideUp();
+			lastopen.removeClass('lastopen');
+		}
+		lastopen = $(this).siblings('.firms');
+	});
+	
+	$('#middle div').dblclick(function(){
+		$('#resizeback').hide();
+		$('#middle div').css({background: 'transparent'});
+		$('#left').css('width', 'calc(50% - 2px)');
+		$('#right').css('width', 'calc(50% - 2px)');
+		$('#middle div').css('left', 'calc(50% - 2px)');
+	});
+	
+	$('#middle div').mousedown(function(){
+		$('#resizeback').show();
+		$('#middle').css('position','static');
+		$('#middle div').css('background','black');
+	});
+	$('#middle div').mouseover(function(){
+		$(this).css('cursor','ew-resize');
+	});
+	$('#middle div').draggable({
+		axis: 'x',
+		cursor: 'ew-resize',
+		containment: '#resizeback',
+		stop: function(event, ui) {
+			$('#resizeback').hide();
+			$('#middle div').css({background: 'transparent'});
+			backwidth = $('#wrapper').outerWidth();
+			leftwidth2 = ui.position.left + 2;
+			leftpercent = 100 / backwidth * leftwidth2;
+			rightpercent = 100 - leftpercent;
+			$('#left').css('width', 'calc('+leftpercent+'% - 2px)');
+			$('#right').css('width', 'calc('+rightpercent+'% - 2px)');
+			$('#middle div').css('left', 'calc('+leftpercent+'% - 2px)');
+		}
 	});
 	
 }
@@ -128,7 +166,9 @@ function socketVerbinden() {
 	// on connection to server, ask for user's name with an anonymous callback
 	socket.on('connect', function(){
 		// call the server-side function 'adduser' and send one parameter (value of prompt)
-		socket.emit('adduser', session['userid'], session['name']);
+		var usernamelower = session['name'].toLowerCase();
+		console.log(usernamelower);
+		socket.emit('adduser', session['userid'], usernamelower);
 	});
 	
 	// listener, whenever the server emits 'updatechat', this updates the chat body
@@ -159,7 +199,7 @@ $(function() {
 	
 	$.ajax({
 		type: 'POST',
-		url: '/functions/getsessiondata.php',
+		url: '/functions/getsessionidname.php',
 		data: 'none',
 		success: function(data) {
 			session = new Array();

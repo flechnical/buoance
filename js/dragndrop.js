@@ -153,6 +153,5 @@ function initDragListeners() {
 			};
 		})(i);
 	}
-	closeCinema();
 	// hier den loader wieder schließen, weil alle Funktionen geladen sind // vllt. noch ausbauen auf guten loader mit Sachen die ueberprueft werden sollen // Modul ... fertig geladen // wenn array durchgegangen fertig
 }

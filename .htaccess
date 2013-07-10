@@ -15,10 +15,18 @@ php_value default_charset utf-8
 RewriteEngine on
 # mod_rewrite einschalten
 
-# funktioniert nicht wie es sollte, location Variable wird nicht gesetzt
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ /index.php?location=$1.php
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !-d
+
+# wenn keine Location wird sowieso index.php reingeladen also muss man fuer / keine Regel festlegen
+RewriteRule ^bearbeitung/(.*)/(.*)$ /index.php?location=bearbeitung.php&klasse=$1&student=$2
+RewriteRule ^bearbeitung/(.*)$ /index.php?location=bearbeitung.php&klasse=$1
+RewriteRule ^bearbeitung$ /index.php?location=bearbeitung.php
+RewriteRule ^zuteilung$ /index.php?location=zuteilung.php
+RewriteRule ^login$ /index.php?location=login.php
+RewriteRule ^logout$ /index.php?location=logout.php
+
+#RewriteRule ^(.*)$ /index.php?location=$1.php funktioniert irgendwie nicht, anscheinend ueberschreibt es die anderen Regeln kA
 
 #Options +Indexes
 # Zugriff auf Verzeichnisuebersicht sperren - nur aktuelles Verzeichnis
