@@ -39,6 +39,9 @@ class users{
 			unset($_SESSION['name']);
 			unset($_SESSION['mail']);
 			unset($_SESSION['avatar']);
+			unset($_SESSION['kernteam']);
+			unset($_SESSION['admin']);
+			unset($_SESSION['userart']);
 			unset($_SESSION['ref']);
 		
 			if(isset($_COOKIE[session_name()])){

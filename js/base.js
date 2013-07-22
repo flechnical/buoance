@@ -11,6 +11,7 @@ function loadFunctions() {
 	initDragListeners();
 	initNanoScroller();
 	closeCinema();
+	initSponsorSearch();
 }
 // $_SESSION-Variablen in JavaScript abspeichern
 function getSessionData(variable) {

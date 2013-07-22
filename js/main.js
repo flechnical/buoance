@@ -111,9 +111,10 @@ function initNanoScroller() {
 		$('#middle div').css('left', leftwidth);
 	});
 	
-	lastopen = 1;
+	if (typeof lastopen == 'undefined') lastopen = 1;
 	$('.dropped .itemDropper .student').click(function(){
 		hasTheClass = $(this).siblings('.firms').hasClass('lastopen');
+		console.log($(this).siblings('.firms'));
 		$(this).siblings('.firms').slideToggle().addClass('lastopen');
 		if (lastopen != 1 && !hasTheClass) {
 			lastopen.slideUp();
@@ -195,6 +196,65 @@ function socketVerbinden() {
 	
 }
 
+function searchSponsors() {
+	if (typeof searchTimeout != 'undefined') {
+		clearTimeout(searchTimeout);
+	}
+	var term = $('#search').val();
+	var xhr = new XMLHttpRequest();
+	xhr.open('POST', '/functions/searchsponsors.php', true);
+	var fd = new FormData();
+	fd.append('term', term);
+	xhr.send(fd);
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			document.getElementById('sponsorsearch').innerHTML = xhr.responseText;
+			startScript();
+			loadFunctions();
+		}
+	};
+	window.history.pushState({path: '/bearbeitung/'+term}, '', '/bearbeitung/'+term);
+}
+
+function clearSearch() {
+	var userart = getSessionData('userart');
+	var xhr = new XMLHttpRequest();
+	xhr.open('GET', '/sites/'+userart+'/bearbeitung/tags.php', true);
+	xhr.send();
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			document.getElementById('sponsorsearch').innerHTML = xhr.responseText;
+		}
+	};
+	window.history.pushState({path: '/bearbeitung'}, '', '/bearbeitung');
+}
+
+function initSponsorSearch() {
+	$('#search').keypress(function() {
+		if (typeof searchTimeout != 'undefined') {
+			clearTimeout(searchTimeout);
+		}
+		searchTimeout = setTimeout(searchSponsors, 400);
+	});
+	$('#search').keyup(function(e) {
+		if (e.keyCode == 8) {
+			if (typeof searchTimeout != 'undefined') {
+				clearTimeout(searchTimeout);
+			}
+			searchTimeout = setTimeout(searchSponsors, 400);
+			if ($('#search').val() == '') {
+				clearSearch();
+				clearTimeout(searchTimeout);
+			}
+		}
+	});
+}
+
+function setSearch(vorschlag) {
+	document.getElementById('search').value = vorschlag;
+	searchSponsors();
+}
+
 $(function() {
 	
 	$.ajax({
@@ -218,5 +278,19 @@ $(function() {
 	/*
 		Pruefen ob der User angemeldet ist (mit session) hat nicht funktioniert
 	*/
+	
+	$('header#mainheader h1.title, nav#menu').mouseover(function() {
+		$('nav#menu').show();
+		if (typeof closeTimeout != 'undefined') {
+			clearTimeout(closeTimeout);
+		}
+	});
+	$('header#mainheader h1.title, nav#menu').mouseout(function() {
+		closeTimeout = setTimeout(function() {$('nav#menu').hide();}, 600);
+	});
+	
+	if ($('#search').val() != '') {
+		searchSponsors();
+	}
 	
 });

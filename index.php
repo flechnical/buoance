@@ -27,15 +27,30 @@ include('comps/usersession.php');
 	<![endif]-->
 
 	<header id="mainheader" class="clearfix">
-		<h1 class="title"><a href="/" class="ajaxlink"><img src="/img/scool.png" height="30px" alt="s'Cool Ball" /></a></h1>
-		<div class="seperate"></div>
+		<h1 class="title"><a href="/" class="ajaxlink"><img src="/img/scool.png" height="30px" alt="s'Cool Ball" /><img id="dropdown" src="/img/dropdown.png" alt="Menü-Dropdown" /></a></h1>
 		<nav id="menu">
 			<ul>
-					<li><input type="text" id="search" placeholder="Suchbegriff eingeben..." /></li>
-					<li><a href="/bearbeitung" class="ajaxlink cupid-green">Bearbeitung</a></li>
-					<li><a href="/zuteilung" class="ajaxlink cupid-green">Zuteilung</a></li>
+				<?php
+				if (isset($_SESSION['name'])) {
+				?>
+				<li><a href="/sponsoren" class="ajaxlink">Sponsoren</a></li>
+				<li><a href="/aufgaben" class="ajaxlink">Aufgaben</a></li>
+				<?php
+					if ($_SESSION['kernteam'] == '1' || $_SESSION['admin'] == '1') {
+				?>
+					<li><a href="/kontrolle" class="ajaxlink">Kontrolle</a></li>
+					<li><a href="/zuteilung" class="ajaxlink">Zuteilung</a></li>
+					<li><a href="/bearbeitung" class="ajaxlink">Bearbeitung</a></li>
+				<?php
+					}
+				}
+				?>
 			</ul>
 		</nav>
+		<div class="seperate"></div>
+		<div id="stats">
+			("Statistiken über Fertigstellung von Sponsoren und Aufgaben")
+		</div>
 	</header>
 
 	<aside id="sidekick">
@@ -96,7 +111,11 @@ include('comps/usersession.php');
 				if (!isset($_SESSION['status'])) {
 					include 'sites/login.php';
 				} else if (isset($_GET['location'])) {
-					include 'sites/'.$_GET['location'];
+					if ($_SESSION['userart'] == 'beides') {
+						include 'sites/chooseprofile.php';
+					} else {
+						include 'sites/'.$_SESSION['userart'].'/'.$_GET['location'];
+					}
 				} else {
 					include 'sites/index.php';
 				}
