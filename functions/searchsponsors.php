@@ -25,7 +25,7 @@ echo <<<HERE
 HERE;
 }
 
-if (mysql_num_rows($result) == 0) {
+if (mysql_num_rows($result) == 0) { // Suchvorschlaege wenn nichts gefunden wurde
 	$names = mysql_query("SELECT firmenname FROM sponsoren ORDER BY firmenname ASC");
 	$streets = mysql_query("SELECT strasse FROM sponsoren ORDER BY strasse ASC");
 

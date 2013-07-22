@@ -34,20 +34,20 @@ if (isset($_GET['sponsoren']) && $_GET['sponsoren'] != '__') {
 	$key1 = array_search($_GET['sponsoren'], $sponsorPlz);
 	$sponsorenOrt = $sponsorOrt[$key1];
 	$sponsorenLocation = $_GET['sponsoren'].' '.$sponsorOrt[$key1];
-	echo '<script type="text/javascript">sponsorLocation = ', $_GET['sponsoren'], '</script>';
+	echo '<script type="text/javascript">sponsorLocation = \'', $_GET['sponsoren'], '\';</script>';
 } else {
 	$sponsorenLocation = false;
-	echo '<script type="text/javascript">sponsorLocation = \'__\'</script>';
+	echo '<script type="text/javascript">sponsorLocation = \'__\';</script>';
 }
 
 if (isset($_GET['students']) && $_GET['students'] != '__') {
 	$key2 = array_search($_GET['students'], $studentPlz);
 	$studentenOrt = $studentOrt[$key2];
 	$studentsLocation = $_GET['students'].' '.$studentOrt[$key2];
-	echo '<script type="text/javascript">studentLocation = ', $_GET['students'], '</script>';
+	echo '<script type="text/javascript">studentLocation = \'', $_GET['students'], '\';</script>';
 } else {
 	$studentsLocation = false;
-	echo '<script type="text/javascript">studentLocation = \'__\'</script>';
+	echo '<script type="text/javascript">studentLocation = \'__\';</script>';
 }
 
 ?>
@@ -56,7 +56,7 @@ if (isset($_GET['students']) && $_GET['students'] != '__') {
 	<div class="content">
 		<h2>Sponsoren</h2>
 		<div style="<?php if ($sponsorenLocation) echo 'display: block;'; ?>" class="filter">
-			<span><?php echo $sponsorenLocation; ?></span> X
+			<span><?php echo $sponsorenLocation; ?></span> x
 		</div>
 		<div class="<?php echo ($sponsorenLocation) ? 'listcontainer' : 'tagwrapper'; ?>">
 			<?php
@@ -108,7 +108,7 @@ if (isset($_GET['students']) && $_GET['students'] != '__') {
 	<div class="content">
 		<h2>Schüler</h2>
 		<div style="<?php if ($studentsLocation) echo 'display: block;'; ?>" class="filter">
-			<span><?php echo $studentsLocation; ?></span> X
+			<span><?php echo $studentsLocation; ?></span> x
 		</div>
 		<div class="<?php echo ($studentsLocation) ? 'listcontainer' : 'tagwrapper'; ?>">
 		<?php

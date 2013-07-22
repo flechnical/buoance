@@ -289,7 +289,7 @@ $(function() {
 		closeTimeout = setTimeout(function() {$('nav#menu').hide();}, 600);
 	});
 	
-	if ($('#search').val() != '') {
+	if (typeof $('#search')[0] != 'undefined' && $('#search').val() != '') {
 		searchSponsors();
 	}
 	

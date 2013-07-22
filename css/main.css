@@ -328,6 +328,7 @@ header nav ul li:hover img.dropout {
 	margin: 0;
 	display: inline-block;
 	vertical-align: top;
+	position: relative;
 }
 
 .hname {
@@ -406,7 +407,7 @@ ul#sponsorsearch li span.suggestion {
 	padding: 0 10px;
 }
 
-.dplz .filtertag, .dstudent .filtertag {
+.dplz .searchfilter, .dstudent .searchfilter {
 	display: block;
 	overflow: hidden;
 	text-overflow: ellipsis;

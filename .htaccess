@@ -24,7 +24,7 @@ RewriteRule ^kontrolle/(.*)$ /index.php?location=kontrolle.php&klasse=$1
 RewriteRule ^kontrolle$ /index.php?location=kontrolle.php
 RewriteRule ^zuteilung/(.*)/(.*)$ /index.php?location=zuteilung.php&sponsoren=$1&students=$2
 RewriteRule ^zuteilung$ /index.php?location=zuteilung.php
-RewriteRule ^bearbeitung/(.*)/(.*)$ /index.php?location=bearbeitung.php&plz=$1&student=$2
+RewriteRule ^bearbeitung/(.*)/(.*)$ /index.php?location=bearbeitung.php&sponsoren=$1&students=$2
 RewriteRule ^bearbeitung/(.*)$ /index.php?location=bearbeitung.php&search=$1
 RewriteRule ^bearbeitung$ /index.php?location=bearbeitung.php
 RewriteRule ^login$ /index.php?location=login.php

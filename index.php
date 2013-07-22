@@ -113,6 +113,8 @@ include('comps/usersession.php');
 				} else if (isset($_GET['location'])) {
 					if ($_SESSION['userart'] == 'beides') {
 						include 'sites/chooseprofile.php';
+					} else if ($_GET['location'] == 'logout.php') {
+						include 'sites/logout.php';
 					} else {
 						include 'sites/'.$_SESSION['userart'].'/'.$_GET['location'];
 					}
