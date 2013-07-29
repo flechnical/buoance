@@ -17,6 +17,7 @@ include('comps/usersession.php');
 	<link rel="stylesheet" href="/css/normalize.min.css">
 	<link rel="stylesheet" href="/css/nanoscroller.css">
 	<link rel="stylesheet" href="/css/main.css">
+	<link rel="stylesheet" href="/css/media.css">
 	<link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
 
 	<script src="/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
@@ -27,7 +28,7 @@ include('comps/usersession.php');
 	<![endif]-->
 
 	<header id="mainheader" class="clearfix">
-		<h1 class="title"><a href="/" class="ajaxlink"><img src="/img/scool.png" height="30px" alt="s'Cool Ball" /><img id="dropdown" src="/img/dropdown.png" alt="Menü-Dropdown" /></a></h1>
+		<h1 class="title"><a href="/" class="ajaxlink"><img src="/img/scool.png" height="30" alt="s'Cool Ball" /><img id="dropdown" src="/img/dropdown.png" alt="Menü-Dropdown" /></a></h1>
 		<nav id="menu">
 			<ul>
 				<?php
@@ -93,7 +94,7 @@ include('comps/usersession.php');
 			Kommunikation
 		</div>
 		<div id="credits">
-			<img src="/img/buoance.png" width="120px" alt="buoance" /><br />
+			<img src="/img/buoance.png" width="120" alt="buoance" /><br />
 			&copy; 03.2013
 		</div>
 	</aside>
@@ -119,13 +120,14 @@ include('comps/usersession.php');
 						include 'sites/'.$_SESSION['userart'].'/'.$_GET['location'];
 					}
 				} else {
-					include 'sites/index.php';
+					include 'sites/'.$_SESSION['userart'].'/index.php';
 				}
 			?>
 			
 		</div>
 	</div>
 	
+	<img id="dragimage" src="/img/dragndrop.png" style="display: none;" />
 	<script src="http://buoance_chat.jit.su/socket.io/socket.io.js"></script> <!-- online: http://buoance.eu01.aws.af.cm / lokal: http://localhost:8000 -->
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>

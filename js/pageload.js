@@ -22,16 +22,35 @@ function startScript() {
 				// }
 				
 				page = pathname.split('/'); // [0] ==> ""
-				if (page.length > 3) { // URL/____/____/____ ==> "" / "____" / "____" / "____"
-					if (page[1] == 'kontrolle') {
-						xhr.open('GET', '/sites/'+userart+'/'+page[1]+'.php?klasse='+page[2]+'&student='+page[3], true);
-					}
-				} else if (page.length > 2) { // URL/____/____
-					if (page[1] == 'kontrolle') {
-						xhr.open('GET', '/sites/'+userart+'/'+page[1]+'.php?klasse='+page[2], true);
-					}
-				} else { // URL/____
+				// if (page.length > 3) { // URL/____/____/____ ==> "" / "____" / "____" / "____"
+					// if (page[1] == 'kontrolle') {
+						// xhr.open('GET', '/sites/'+userart+'/'+page[1]+'.php?klasse='+page[2]+'&student='+page[3], true);
+					// }
+				// } else if (page.length > 2) { // URL/____/____
+					// if (page[1] == 'kontrolle') {
+						// xhr.open('GET', '/sites/'+userart+'/'+page[1]+'.php?klasse='+page[2], true);
+					// }
+				// } else { // URL/____
 					xhr.open('GET', '/sites/'+userart+'/'+page[1]+'.php', true);
+				// }
+				
+				if (page[1] != 'bearbeitung') { // damit beim Wechsel von Bearbeitung auf Zuteilung die Variablen wieder geloescht sind
+					sponsorPlz = undefined;
+					sponsorOrt = undefined;
+					studentId = undefined;
+					studentFirst = undefined;
+					studentLast = undefined;
+				} else {
+					sponsorPlz = '__';
+					sponsorOrt = '__';
+					studentId = '__';
+					studentFirst = '__';
+					studentLast = '__';
+				}
+				
+				if (page[1] == 'zuteilung') {
+					sponsorLocation = '__';
+					studentLocation = '__';
 				}
 				
 				// besser für jeden / einen GET reinstellen ?asdf=asdf&asdf=asdf ...
@@ -72,10 +91,11 @@ function startScript() {
 				var locationPlz = this.dataset.locationplz;
 				var locationOrt = this.dataset.locationort;
 				var seite = (hasClass(this, 'left')) ? 'left' : 'right';
+				var get = (seite == 'left') ? 'sponsoren' : 'students';
 				var xhr = new XMLHttpRequest();
 				
 				// wenn Strg -> fuer beide Filter setzen und in beide reinladen
-				xhr.open('GET', '/sites/'+userart+'/zuteilung/'+seite+'/liste.php?plz='+locationPlz+'&ort='+locationOrt, true);
+				xhr.open('GET', '/sites/'+userart+'/zuteilung/'+seite+'/liste.php?'+get+'='+locationPlz, true);
 				
 				xhr.send();
 				xhr.onreadystatechange = function() {
@@ -93,10 +113,10 @@ function startScript() {
 					studentLocation = locationPlz;
 				}
 				
-				filter = document.querySelector('#'+seite+' .filter');
-				filterTitle = document.querySelector('#'+seite+' .filter span');
-				filter.style.display = 'block';
-				filterTitle.innerHTML = locationPlz+' '+locationOrt;
+				$('#'+seite+' h2').addClass('filter');
+				filterTitle = document.querySelector('#'+seite+' .filter');
+				filterTitle.innerHTML = locationPlz+'<br />'+locationOrt;
+				$('#'+seite+' .filter').append('<span class="closefilter"></span>');
 				
 				pageurl = '/zuteilung/'+sponsorLocation+'/'+studentLocation;
 				
@@ -130,45 +150,60 @@ function startScript() {
 					studentId = this.dataset.studentid;
 					studentFirst = this.dataset.studentfirst;
 					studentLast = this.dataset.studentlast;
-					seite = 'hstudent';
+					seite = 'student';
 					title = studentFirst+' '+studentLast;
 				} else {
 					sponsorPlz = this.dataset.locationplz;
 					sponsorOrt = this.dataset.locationort;
-					seite = 'hplz';
+					seite = 'plz';
 					title = sponsorPlz+' '+sponsorOrt;
 				}
 				
-				filter = document.querySelector('.'+seite+' .filter');
-				filterTitle = document.querySelector('.'+seite+' .filter span');
-				filter.style.display = 'block';
-				filterTitle.innerHTML = title;
-				
-				searchBox = document.getElementById('search');
-				searchBox.disabled = true;
-				searchBox.style.opacity = '.4';
-				
 				if (e.ctrlKey) {
+					$('.h'+seite).addClass('filter');
+					filterTitle = document.querySelector('.h'+seite+'.filter .textnode');
+					filterTitle.innerHTML = title;
+					$('.h'+seite+'.filter .textnode').attr('title', title);
+					$('.h'+seite+'.filter').append('<span class="closefilter"></span>');
+					
+					searchBox = document.getElementById('search');
+					searchBox.disabled = true;
+					searchBox.style.opacity = '.4';
+					document.querySelector('.d'+seite).style.visibility = 'hidden';
+					document.querySelector('.d'+seite).style.height = '0';
+					loadFunctions();
 					// vorher noch die Filter rechts durch Uebereinstimmungen ersetzen / nur wenn auch Schueler dazu gefunden werden
+						// evtl.
 					return false;
 				}
 				
 				var xhr = new XMLHttpRequest();
 				
-				// wenn Strg -> fuer beide Filter setzen und in beide reinladen
-				if (sponsorPlz != '__' && studentId != '__') { // beide Filter gesetzt
-					var parameter = 'sponsorplz='+sponsorPlz+'&sponsorort='+sponsorOrt+'&studentid='+studentId;
-				} else if (sponsorPlz != '__') {
-					var parameter = 'sponsorplz='+sponsorPlz+'&sponsorort='+sponsorOrt;
-				} else {
-					var parameter = 'studentid='+studentId;
-				}
+				// if (sponsorPlz != '__' && studentId != '__') { // beide Filter gesetzt
+					var parameter = 'sponsoren='+sponsorPlz+'&students='+studentId; // wird dann in php-Datei gemacht
+				// } else if (sponsorPlz != '__') {
+					// var parameter = 'sponsoren='+sponsorPlz;
+				// } else {
+					// var parameter = 'students='+studentId;
+				// }
 				xhr.open('GET', '/sites/'+userart+'/bearbeitung/liste.php?'+parameter, true);
 				
 				xhr.send();
 				xhr.onreadystatechange = function() {
 					if (xhr.readyState == 4 && xhr.status == 200) {
+						$('.h'+seite).addClass('filter');
+						filterTitle = document.querySelector('.h'+seite+'.filter .textnode');
+						filterTitle.innerHTML = title;
+						$('.h'+seite+'.filter .textnode').attr('title', title);
+						$('.h'+seite+'.filter').append('<span class="closefilter"></span>');
+						if (studentId == '__') $('.hstudent').addClass('nofilter');
+						if (sponsorPlz == '__') $('.hplz').addClass('nofilter');
+						
+						searchBox = document.getElementById('search');
+						searchBox.disabled = true;
+						searchBox.style.opacity = '.4';
 						document.querySelector('#sponsorsearch').innerHTML = xhr.responseText;
+						$('#sponsorsearch').addClass('notags');
 						startScript();
 						loadFunctions();
 					}
@@ -178,6 +213,86 @@ function startScript() {
 				
 				if (pageurl != window.location) {
 					window.history.pushState({path: pageurl}, '', pageurl);
+				}
+				
+			}
+			
+			if (e.which == 1) return false; // normalem Link-Klick vorbeugen
+			
+		};
+	}
+	
+	var notags = document.getElementsByClassName('notags')[0];
+	if (notags) {
+		var searchResult = notags.getElementsByTagName('li');
+		if (searchResult.length) {
+			var deleter = document.createElement('span');
+			deleter.appendChild(document.createTextNode('Löschen'));
+			var deleterDiv = document.createElement('div');
+			deleterDiv.appendChild(deleter);
+			deleterDiv.className = 'deleter';
+		}
+		for (i = 0; i < searchResult.length; i++) {
+			(function(index){
+				searchResult[i].onmouseover = function(e) {
+					target = searchResult[index];
+					if (e.shiftKey) {
+						deleterArray = document.getElementsByClassName('deleter');
+						for (x = 0; x < deleterArray.length; x++) {
+							deleterArray[x].style.display = 'none';
+						}
+						target.appendChild(deleterDiv);
+						target.childNodes[4].style.display = 'block';
+						document.querySelector('div.deleter span').onclick = function(e) {
+							console.log('clicked for deletion');
+						};
+					} else if (!target.childNodes[4] || target.childNodes[4].style.display != 'block') {
+						target.onclick = function(e) {
+							console.log('clicked for change');
+						};
+					}
+				};
+				searchResult[i].onmouseout = function(e) {
+					target = searchResult[index];
+					if (e.shiftKey) {
+						if (target.childNodes[4]) {
+							target.childNodes[4].style.display = 'none';
+							document.querySelector('div.deleter span').onclick = '';
+						}
+					}
+					target.onclick = '';
+				}
+			})(i);
+		}
+	}
+	
+	var controlLink = document.getElementsByClassName('controllink');
+	for (i = 0; i < controlLink.length; i++) {
+		controlLink[i].onclick = function(e) {
+			if (e.which == 1) {
+				
+				var userart = getSessionData('userart');
+				
+				var controllocation = this.getAttribute('href');
+				var getdata = controllocation.split('/kontrolle/')[1];
+				var art = (getdata.indexOf('/') != -1) ? 'student' : 'klasse';
+				var get = (art == 'student') ? getdata.split('/')[1] : getdata;
+				
+				var xhr = new XMLHttpRequest();
+				
+				xhr.open('GET', '/sites/'+userart+'/kontrolle/'+art+'.php?'+art+'='+get, true);
+				
+				xhr.send();
+				xhr.onreadystatechange = function() {
+					if (xhr.readyState == 4 && xhr.status == 200) {
+						document.getElementById('control').innerHTML = xhr.responseText;
+						startScript();
+						loadFunctions();
+					}
+				};
+				
+				if (controllocation != window.location) {
+					window.history.pushState({path: controllocation}, '', controllocation);
 				}
 				
 			}

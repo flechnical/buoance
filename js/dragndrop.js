@@ -74,8 +74,7 @@ function startDrag(e, clicked) {
 		return false;
 	}
 	var number = (activeItems.length > 0) ? activeItems.length : 1;
-	var image = new Image();
-	image.src = '/img/dragndrop.png';
+	var image = document.getElementById('dragimage');
 	var canvas = document.createElement('canvas');
 	canvas.width = image.width;
 	canvas.height = image.height;

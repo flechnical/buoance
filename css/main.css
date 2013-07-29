@@ -325,7 +325,6 @@ header nav ul li:hover img.dropout {
 
 #headings span {
 	font-weight: bold;
-	margin: 0;
 	display: inline-block;
 	vertical-align: top;
 	position: relative;
@@ -334,36 +333,82 @@ header nav ul li:hover img.dropout {
 .hname {
 	width: calc(60% - 20px);
 	min-width: 340px;
-	padding: 0 10px;
+	padding: 0 10px 0 0;
 }
 
 .hplz, .hstudent {
 	width: calc(20% - 20px);
 	min-width: 100px;
-	padding: 0 10px;
+	margin: 0 10px;
+	padding: 2px 5px;
+	/*box-shadow: 0 3px 0 #ddd;*/
+	background: white;
+	box-shadow: -3px 0px 0 rgb(200,200,200);
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+}
+
+.hstudent {
+	margin: 0 0 0 10px;
 }
 
 #search {
 	background: url(/img/search.png) no-repeat 10px 6px #fcfcfc;
-	border: 1px solid #d1d1d1;
+	border: 0;
 	font: normal 12px Arial,Helvetica,Sans-serif;
 	padding: 6px 15px 6px 35px;
-	border-radius: 3px;
+	border-radius: 2px;
 	width: calc(100% - 50px);
-	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
-	-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
-	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+	box-shadow: 0 3px 0 #ddd;
 }
 
 ul#sponsorsearch {
 	list-style: none;
 	padding: 0;
+	border-radius: 2px;
+}
+
+ul#sponsorsearch.notags {
+	box-shadow: -3px 0 0 rgb(204, 204, 204);
+	overflow: hidden;
 }
 
 ul#sponsorsearch li {
+	position: relative;
 	background: #eee;
-	margin-bottom: 4px;
+	margin-bottom: 1px;
 	cursor: pointer;
+	box-shadow: 0 1px 0 rgb(204, 204, 204);
+}
+
+.notags li:first-child {
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+}
+
+.notags li:last-child {
+	border-bottom-right-radius: 2px;
+	border-bottom-left-radius: 2px;
+}
+
+ul#sponsorsearch.notags li div {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 26px;
+	box-shadow: 0 2px 0 rgb(194, 194, 194);
+	background: rgba(231, 231, 231, 0.8);
+}
+
+.notags li div span {
+	background: rgb(61, 61, 61);
+	color: white;
+	padding: 1px 8px 2px;
+	right: 0;
+	position: absolute;
+	box-shadow: 0 2px 0 rgb(40,40,40);
 }
 
 ul#sponsorsearch li:hover {
@@ -374,37 +419,70 @@ ul#sponsorsearch li.tags {
 	background: none;
 	margin-bottom: 0;
 	cursor: default;
+	box-shadow: none;
+	margin-top: -13px;
 }
 
 ul#sponsorsearch li.tags:hover {
 	background: none;
 }
 
-ul#sponsorsearch li span {
+ul#sponsorsearch li > span {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	display: inline-block;
-	margin: 0;
 	vertical-align: top;
+	padding-top: 2px;
+	padding-bottom: 2px;
 }
 
-ul#sponsorsearch li span.suggestion {
+ul#sponsorsearch li > span.suggestion {
 	text-decoration: underline;
 	color: #00F;
 	cursor: pointer;
 }
 
+.tags .dplz, .tags .dstudent {
+	background: #eee;
+	border-bottom-left-radius: 2px;
+	border-bottom-right-radius: 2px;
+	box-shadow: -3px 0px 0 rgb(200,200,200);
+}
+
+.tags a {
+	padding: 4px 24px 4px 8px;
+	position: relative;
+}
+
+.tags a .open {
+	background: rgb(246, 231, 151);
+	position: absolute;
+	right: 0;
+	padding: 0 4px;
+	border-top-left-radius: 2px;
+	border-bottom-left-radius: 2px;
+}
+
 .dname, .dstreet {
-	width: calc(30% - 20px);
+	width: calc(30% - 30px);
 	min-width: 160px;
-	padding: 0 10px;
+	margin: 0 10px;
+	padding: 0 0 0 10px;
+}
+
+.dname {
+	margin: 0 10px 0 0;
 }
 
 .dplz, .dstudent {
-	width: calc(20% - 20px);
+	width: calc(20% - 10px);
 	min-width: 100px;
-	padding: 0 10px;
+	margin: 0 10px;
+}
+
+.dstudent {
+	margin: 0 0 0 10px;
 }
 
 .dplz .searchfilter, .dstudent .searchfilter {
@@ -416,6 +494,70 @@ ul#sponsorsearch li span.suggestion {
 	background: none;
 	border-radius: 0;
 	box-shadow: none;
+}
+
+.searchfilter:hover {
+	background: #E4E4E4;
+}
+
+ul#control {
+	list-style: none;
+	padding: 0;
+	border-radius: 2px;
+	box-shadow: -3px 0 0 rgb(204, 204, 204);
+	overflow: hidden;
+}
+
+ul#control li {
+	background: #eee;
+	margin-bottom: 1px;
+	box-shadow: 0 1px 0 rgb(204,204,204);
+	position: relative;
+}
+
+ul#control li:hover {
+	background: #ddd;
+}
+
+ul#control li:first-child {
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+}
+
+ul#control li:last-child {
+	border-bottom-right-radius: 2px;
+	border-bottom-left-radius: 2px;
+}
+
+ul#control li a, ul#control li span {
+	display: block;
+	padding: 4px 8px;
+}
+
+.panel {
+	position: absolute;
+	top: 0;
+	right: 8px;
+}
+
+.info {
+	display: none;
+}
+
+.comment {
+	
+}
+
+.confirm {
+	
+}
+
+.confirmdata {
+	
+}
+
+.notes {
+	
 }
 
 /* ==========================================================================
@@ -739,8 +881,11 @@ box-shadow: none;
  sections
  ========================================================================== */
 
+section#main {
+	background: url(/img/blue.png);
+}
+
 section#left, section#right {
-	width: -webkit-calc(50% - 2px);
 	width: calc(50% - 2px);
 	max-width: calc(100% - 304px);
 	min-width: 300px;
@@ -749,8 +894,8 @@ section#left, section#right {
 }
 
 section#left {
-	background-image: url(/img/background/fabric.jpg);
 	box-shadow: 10px 0 40px rgba(0,0,0,.4) inset;
+	background: rgb(128, 140, 153);
 }
 
 div#resizeback {
@@ -787,52 +932,87 @@ div#middle div {
 }*/
 
 section#right {
-	background-image: url(/img/background/wood.png);
+	background: rgb(131, 147, 172);
 	/*background-size: auto 100%;*/
 	box-shadow: -10px 0 40px rgba(0,0,0,.4) inset;
 	overflow: hidden;
 }
 
+#main h2 {
+	margin: 20px 0 40px;
+	color: rgb(240, 240, 240);
+	text-shadow: 0 3px 0 #B6B6B6;
+}
+
 #left h2, #right h2 {
-	margin: 40px;
+	margin: 20px 0 40px;
+	color: rgb(240, 240, 240);
+	text-shadow: 0 3px 0 #B6B6B6;
+	position: relative;
 }
 
-#left h2 {
-	color: #83f481;
-	text-shadow: 0 0 10px rgba(0,0,0,.6);
-}
-
-#right h2 {
-	color: white;
-	/*text-shadow: 2px 2px 0px #ff0, -2px -2px 0px #f0f, -2px 2px 0px #0ff, 2px -2px 0px #0f0, 0px 0px 50px #000;*/
-	text-shadow: 0 0 10px rgba(0,0,0,.6);
+div.padding {
+	width: calc(100% - 40px);
+	padding: 20px;
 }
 
 .filter {
-	background: lightgrey;
-	border-bottom-left-radius: 5px;
-	border-bottom-right-radius: 5px;
-	box-shadow: 0 0 5px rgba(0,0,0,.4);
-	display: inline-block;
-	margin-right: 10px;
-	margin-bottom: 10px;
-	padding: 0 4px;
-	font-size: 12px;
-	position: absolute;
-	right: 20px;
-	top: 0;
-	display: none;
+	box-shadow: 0 3px 0 rgb(202, 182, 147);
+	background: rgb(241, 220, 183);
+	border-radius: 2px;
 }
 
-div.tagwrapper {
-	padding: 20px;
+h2.filter {
+	background: none;
+	box-shadow: none;
+}
+
+.nofilter {
+	border-radius: 2px;
+	box-shadow: 0 3px 0 rgb(200,200,200);
+}
+
+.filter .textnode {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	padding-right: 20px;
+}
+
+.closefilter {
+	position: absolute !important;
+	top: 0;
+	right: 0;
+	cursor: pointer;
+	color: #696969;
 	background: white;
+	font-size: 16px;
+	line-height: 0;
+	padding: 13px 6px 14px;
+	box-shadow: 0 3px 0 rgb(214, 214, 214);
+	border-top-right-radius: 2px;
+	border-bottom-right-radius: 2px;    
+}
+
+.closefilter:before {
+	content: 'x';
+}
+
+.closefilter:hover {
+	background: rgb(245, 108, 108);
+	color: white;
+	box-shadow: 0 3px 0 rgb(204, 92, 92);
+}
+
+h2 .closefilter {
+	text-shadow: none;
+	border-radius: 2px;
 }
 
 .filtertag {
-	background: lightgrey;
-	border-radius: 5px;
-	box-shadow: 0 0 5px rgba(0,0,0,.4);
+	background: #eee;
+	border-radius: 2px;
+	box-shadow: 0 3px 0 rgb(200,200,200);
 	display: inline-block;
 	margin-right: 10px;
 	margin-bottom: 10px;
@@ -841,16 +1021,33 @@ div.tagwrapper {
 }
 
 .filtertag.opponent {
-	background: lightblue;
+	background-color: rgb(168, 240, 168);
+	box-shadow: 0 3px 0 rgb(128, 194, 128);
+}
+
+.filtertag .open {
+	background: rgb(246, 231, 151);
+	position: relative;
+	right: -4px;
+	padding: 4px;
+	margin-left: -4px;
+	border-top-right-radius: 2px;
+	border-bottom-right-radius: 2px;
+	box-shadow: 0 3px 0 rgb(211, 185, 129);
+}
+
+#right .filtertag .open {
+	background: rgb(241, 177, 187);
+	box-shadow: 0 3px 0 rgb(199, 150, 157);
 }
 
 .listcontainer {
 	margin: 0;
 	padding: 0;
-}
-
-#left ul li:last-child {
-	border-bottom: none;
+	border-radius: 2px;
+	box-shadow: -3px 0 0 rgb(204, 204, 204);
+	overflow: hidden;
+	background: rgb(204, 204, 204);
 }
 
 li.listitem {
@@ -859,12 +1056,25 @@ li.listitem {
 	-webkit-user-select: none;
 	user-select: none;
 	-khtml-user-drag: element;
-	transition: opacity .2s linear, height .4s linear, padding .4s linear;
+	/*transition: opacity .2s linear, height .4s linear, padding .4s linear; wird in js gemacht */
 	overflow: hidden;
 	list-style: none;
-	border-bottom: 1px solid white;
+	padding: 4px 8px;
+	position: relative;
 	background: #eee;
-	padding: 7px 20px;
+	margin-bottom: 1px;
+	cursor: pointer;
+	box-shadow: 0 1px 0 rgb(204, 204, 204);
+}
+
+li.listitem:first-child {
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+}
+
+li.listitem:last-child {
+	border-bottom-right-radius: 2px;
+	border-bottom-left-radius: 2px;
 }
 
 .dropperContainer {
@@ -991,98 +1201,20 @@ li.listitem:hover {
 li.listitem.active {
 	background: rgb(0, 117, 224);
 	color: white;
-	border-bottom: 1px solid rgb(0, 82, 255);
+	box-shadow: 0 2px 0 rgb(0, 91, 175);
+	margin-bottom: 2px;
+	padding-bottom: 3px;
 }
 
 li.listitem.invisible {
-  opacity: 0;
+  transition: opacity .2s linear, height .4s linear, padding .4s linear;
+	opacity: 0;
 	height: 0;
 	padding: 0 20px;
 }
 
 li.listitem.hidden {
   display: none;
-}
-
-/* ==========================================================================
- Media Queries
- ========================================================================== */
-
-@media only screen and (min-width: 480px) {
-
-/* ====================
-	INTERMEDIATE: Menu
- ==================== */
-
-	nav a {
-/*			float: left;
-			width: 27%;
-			margin: 0 1.7%;
-			padding: 25px 2%;
-*/			margin-bottom: 0;
-	}
-
-	nav li:first-child a {
-			margin-left: 0;
-	}
-
-	nav li:last-child a {
-			margin-right: 0;
-	}
-
-/* ========================
-	INTERMEDIATE: IE Fixes
- ======================== */
-
-	nav ul li {
-			display: inline;
-	}
-
-	.oldie nav a {
-			margin: 0 0.7%;
-	}
-}
-
-@media only screen and (min-width: 768px) {
-
-/* ============
-	WIDE: Menu
- ============ */
-
-	.title {
-			float: left;
-	}
-
-	nav {
-			float: right;
-			width: 38%;
-	}
-
-/* ============
-	WIDE: Main
- ============ */
-
-	.main article {
-			float: left;
-			width: 57%;
-	}
-
-	.main aside {
-			float: right;
-			width: 28%;
-	}
-}
-
-@media only screen and (min-width: 1140px) {
-
-/* ===============
-	Maximal Width
- =============== */
-
-	.wrapper {
-			width: 1026px; /* 1140px - 10% for margins */
-			margin: 0 auto;
-	}
 }
 
 /* ==========================================================================

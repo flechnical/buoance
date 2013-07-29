@@ -1,0 +1,102 @@
+/* ==========================================================================
+ Media Queries
+ ========================================================================== */
+
+@media only screen and (max-width: 1140px) {
+
+/* ===============
+	Maximal Width
+ =============== */
+
+	.wrapper {
+			width: 1026px; /* 1140px - 10% for margins */
+			margin: 0 auto;
+	}
+}
+
+@media only screen and (max-width: 804px) {
+
+/* ============
+	WIDE: Menu
+ ============ */
+
+	.title {
+			float: left;
+	}
+
+	nav {
+			float: right;
+			width: 38%;
+	}
+
+/* ============
+	WIDE: Main
+ ============ */
+
+	.main article {
+			float: left;
+			width: 57%;
+	}
+
+	.main aside {
+			float: right;
+			width: 28%;
+	}
+	
+	aside#sidekick {
+		width: 36px;
+	}
+	
+	header {
+		width: calc(100% - 40px);
+	}
+	
+	div#wrapper {
+		width: calc(100% - 40px);
+	}
+	
+}
+
+@media only screen and (max-width: 480px) {
+
+/* ====================
+	INTERMEDIATE: Menu
+ ==================== */
+
+	nav a {
+/*			float: left;
+			width: 27%;
+			margin: 0 1.7%;
+			padding: 25px 2%;
+*/			margin-bottom: 0;
+	}
+
+	nav li:first-child a {
+			margin-left: 0;
+	}
+
+	nav li:last-child a {
+			margin-right: 0;
+	}
+
+/* ========================
+	INTERMEDIATE: IE Fixes
+ ======================== */
+
+	nav ul li {
+			display: inline;
+	}
+
+	.oldie nav a {
+			margin: 0 0.7%;
+	}
+	
+	aside#sidekick {
+		height: 50px;
+	}
+	
+	div#wrapper {
+		width: 100%;
+	}
+	
+}
