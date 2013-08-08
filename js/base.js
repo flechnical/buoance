@@ -12,6 +12,7 @@ function loadFunctions() {
 	initNanoScroller();
 	closeCinema();
 	initSponsorSearch();
+	initFileUploader();
 }
 // $_SESSION-Variablen in JavaScript abspeichern
 function getSessionData(variable) {
@@ -21,4 +22,17 @@ function getSessionData(variable) {
 		async: false,
 		data: {name: variable}
 	}).responseText;
+}
+function toggleFirms(elem) {
+	hasTheClass = $(elem).siblings('.firms').hasClass('lastopen');
+	$(elem).siblings('.firms').slideToggle().addClass('lastopen');
+	if (lastopen != 1 && !hasTheClass) {
+		lastopen.slideUp();
+		lastopen.removeClass('lastopen');
+	}
+	lastopen = $(elem).siblings('.firms');
+}
+function playSound(soundObj) {
+  var sound = document.getElementById(soundObj);
+	sound.play();
 }

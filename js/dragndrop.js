@@ -27,14 +27,29 @@ function insertActive(elem) {
 		number = 1;
 	}
 	
+	listPresent = 0;
+	for (k = 0; k < elem.childNodes.length; k++) {
+		if (elem.childNodes[k].className.indexOf('firms') != -1) {
+			listPresent++;
+			firmsDiv = elem.childNodes[k];
+			break;
+		}
+	}
+	for (m = 0; m < elem.childNodes.length; m++) {
+		if (elem.childNodes[m].className.indexOf('student') != -1) {
+			studentDiv = elem.childNodes[m];
+			break;
+		}
+	}
+	
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4 && xhr.status == 200) {
-			var content = '<ul class="back">';
+			var content = (listPresent) ? '' : '<div class="firms"><ul>';
 			sponsoren = xhr.responseText.split(', ');
 			for (s = 0; s < sponsoren.length; s++) {
 				inhalt = document.querySelector('li[data-index="'+sponsoren[s]+'"]').innerHTML;
-				content += '<li>'+inhalt+'</li>';
+				content += '<li draggable="true" class="listitem" data-index="'+sponsoren[s]+'">'+inhalt+'</li>';
 			}
 			if (activeItems.length == 0) {
 				var the_one = document.querySelector('li[data-index="'+theone+'"]');
@@ -53,9 +68,15 @@ function insertActive(elem) {
 					}
 				}, 400);
 			}
-			content += '</ul>';
-			elem.innerHTML += content;
+			content += (listPresent) ? '' : '</ul></div>';
+			if (listPresent) {
+				firmsDiv.innerHTML += content;
+			} else {
+				elem.innerHTML += content;
+			}
 			elem.parentNode.className = 'dropperContainer dropped';
+			initNanoScroller();
+			toggleFirms(studentDiv);
 		}
 	};
 	
@@ -110,8 +131,9 @@ function initDragListeners() {
 	dropper = document.getElementsByClassName('itemDropper');
 	for (i = 0; i < dropper.length; i++) {
 		dropper[i].addEventListener('dragenter', function(e) { e.preventDefault(); }, false);
-		dropper[i].addEventListener('dragover', function(e) { e.preventDefault(); }, false);
-		dropper[i].addEventListener('drop', function() { insertActive(this); }, false);
+		dropper[i].addEventListener('dragover', function(e) { e.preventDefault(); $(this).find('.student').addClass('hover'); }, false);
+		dropper[i].addEventListener('dragleave', function(e) { e.preventDefault(); $(this).find('.student').removeClass('hover'); }, false);
+		dropper[i].addEventListener('drop', function() { insertActive(this); $(this).find('.student').removeClass('hover'); }, false);
 	}
 	var item = document.getElementsByClassName('listitem');
 	for (i = 0; i < item.length; i++) {

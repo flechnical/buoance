@@ -1,11 +1,9 @@
 <section id="main" class="nano">
 	<div class="content">
-	<div class="padding">
-		<h2>Aufgaben</h2>
+		<h2>Sponsoren</h2>
+		<ul>
 		<?php
-		if (!isset($_SESSION)) {
-			session_start();
-		}
+		session_start();
 		$userid = $_SESSION['userid'];
 		
 		require_once $_SERVER['DOCUMENT_ROOT'].'/comps/constants.php';
@@ -18,17 +16,13 @@
 		
 		mysql_query("SET NAMES 'utf8'");
 		
-		$query = mysql_query("SELECT * FROM aufgaben WHERE `student`='$userid'"); // ORDER BY nach Erstellungs- oder Fertigstellungsdatum sortieren (oder beides)
-		
-		if (mysql_num_rows($query) == 0) {
-			echo 'Dir wurden noch keine Aufgaben zugeteilt.';
-		}
+		$query = mysql_query("SELECT * FROM sponsoren WHERE `student`='$userid'"); // ORDER BY nach Erstellungs- oder Fertigstellungsdatum sortieren (oder beides)
 		
 		while ($row = mysql_fetch_assoc($query)) {
-			echo $row['title'];
+			echo '<li class="filedropper"><span>', $row['firmenname'], '</span><div class="upload">Datei hochladen<input type="file" class="selector" accept="application/pdf" data-firmid="', $row['id'], '" /></div></li>';
 		}
 		
 		?>
-	</div>
+		</ul>
 	</div>
 </section>

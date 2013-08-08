@@ -79,8 +79,7 @@ if (isset($_GET['students']) && $_GET['students'] != '__') {
 		?>
 		</div>
 		Google Maps einbauen<br />
-		Raphi fragen wie das mit der Zuteilung war und vllt. Suche einbauen
-		Hintergründe anpassen
+		Listen umstylen (einheitlicher)
 		</div>
 	</div>
 </section><!-- wenn included, dann werden die Sachen unten nicht eingefuegt -->

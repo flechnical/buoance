@@ -27,6 +27,8 @@ RewriteRule ^zuteilung$ /index.php?location=zuteilung.php
 RewriteRule ^bearbeitung/(.*)/(.*)$ /index.php?location=bearbeitung.php&sponsoren=$1&students=$2
 RewriteRule ^bearbeitung/(.*)$ /index.php?location=bearbeitung.php&search=$1
 RewriteRule ^bearbeitung$ /index.php?location=bearbeitung.php
+RewriteRule ^aufgaben$ /index.php?location=aufgaben.php
+RewriteRule ^sponsoren$ /index.php?location=sponsoren.php
 RewriteRule ^login$ /index.php?location=login.php
 RewriteRule ^logout$ /index.php?location=logout.php
 

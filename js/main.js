@@ -116,16 +116,18 @@ function initNanoScroller() {
 	});
 	
 	if (typeof lastopen == 'undefined') lastopen = 1;
-	$('.dropped .itemDropper .student').click(function(){
-		hasTheClass = $(this).siblings('.firms').hasClass('lastopen');
-		console.log($(this).siblings('.firms'));
-		$(this).siblings('.firms').slideToggle().addClass('lastopen');
-		if (lastopen != 1 && !hasTheClass) {
-			lastopen.slideUp();
-			lastopen.removeClass('lastopen');
+	dropped = document.getElementsByClassName('dropped');
+	for (x = 0; x < dropped.length; x++) {
+		for (i = 0; i < dropped[x].childNodes[0].childNodes.length; i++) {
+			if (dropped[x].childNodes[0].childNodes[i].className == 'student') {
+				studentsDiv = dropped[x].childNodes[0].childNodes[i];
+				break;
+			}
 		}
-		lastopen = $(this).siblings('.firms');
-	});
+		studentsDiv.onclick = function() {
+			toggleFirms(this);
+		};
+	}
 	
 	$('#middle div').dblclick(function(){
 		$('#resizeback').hide();
@@ -165,6 +167,17 @@ function initNanoScroller() {
 	});
 	
 }
+
+	// $('.dropped .itemDropper .student').click(function(){
+		// hasTheClass = $(this).siblings('.firms').hasClass('lastopen');
+		// console.log($(this).siblings('.firms'));
+		// $(this).siblings('.firms').slideToggle().addClass('lastopen');
+		// if (lastopen != 1 && !hasTheClass) {
+			// lastopen.slideUp();
+			// lastopen.removeClass('lastopen');
+		// }
+		// lastopen = $(this).siblings('.firms');
+	// });
 
 var socket;
 
@@ -267,6 +280,272 @@ function initSponsorSearch() {
 function setSearch(vorschlag) {
 	document.getElementById('search').value = vorschlag;
 	searchSponsors();
+}
+
+var emptyInput = true;
+function changeFields(elem, e) {
+	var klasse = elem.className;
+	var anzahl = elem.value.length;
+	var islast = $(elem).is(':last-child');
+	var last = $('.'+klasse+':last-child');
+	var lastval = $('.'+klasse+':last-child').val();
+	var backspace = (e.keyCode == 8) ? true : false;
+	if (anzahl == 0 && !islast) {
+		$(elem).next().focus();
+		$(elem).remove();
+	} else if (emptyInput && anzahl >= 1 && !backspace && lastval != '') {
+		$('<input type="text" class="'+klasse+'" />').insertAfter(last);
+		emptyInput = false;
+	}
+}
+
+function submitSponsorData(elem) {
+	var id = elem.dataset.id;
+	var sponsern = ($('.colheading.sponsern.'+id).attr('data-enabled') == 'true');
+	var sachpreise = ($('.colheading.sachpreise.'+id).attr('data-enabled') == 'true');
+	var spende = ($('.colheading.spende.'+id).attr('data-enabled') == 'true');
+	var ballheft = false;
+	var format = '';
+	var flyer = false;
+	var verlinkung = false;
+	var betrag = '';
+	var sachpreis = '';
+	var spendenbetrag = '';
+	if (!(sponsern || sachpreise || spende)) {
+		alert('Keine Daten ausgewaehlt.');
+		return false;
+	}
+	if (sponsern) {
+		if ($('#ballheft'+id).is(':checked')) {
+			ballheft = true;
+			if ($('#format'+id).val() == '') {
+				alert('Kein Format eingegeben.');
+				return false;
+			} else {
+				format = $('#format'+id).val();
+			}
+		}
+		if ($('#flyer'+id).is(':checked')) {
+			flyer = true;
+		}
+		if ($('#verlinkung'+id).is(':checked')) {
+			verlinkung = true;
+		}
+		if (!(ballheft || flyer || verlinkung)) {
+			if ($('#betrag'+id).val() != '') {
+				alert('Keine Sponsorleistungen ausgewaehlt.');
+				return false;
+			} else {
+				alert('Sponsordaten nicht ausgefuellt.');
+				return false;
+			}
+		} else {
+			if ($('#betrag'+id).val() == '') {
+				alert('Kein Betrag eingegeben.');
+				return false;
+			} else {
+				betrag = $('#betrag'+id).val();
+			}
+		}
+	}
+	if (sachpreise) {
+		if ($('.sachpreise'+id).length == 1 && $('.sachpreise'+id).val() == '') {
+			alert('Kein Sachpreis angegeben.');
+			return false;
+		}
+		k = 0;
+		$('.sachpreise'+id).each(function() {
+			if ($('.sachpreise'+id).length == k+1) return false;
+			var inhalt = this.value;
+			var anzahl = (isNaN(parseInt(inhalt.split(' ')[0]))) ? '1' : inhalt.split(' ')[0];
+			var space = (isNaN(parseInt(inhalt.split(' ')[0]))) ? 0 : inhalt.indexOf(' ')+1;
+			var delimiter = (k != $('.sachpreise'+id).length-2) ? '<#>' : '';
+			sachpreis += anzahl+';'+inhalt.slice(space, inhalt.length)+delimiter;
+			k++;
+		});
+	}
+	if (spende) {
+		if ($('#spendenbetrag'+id).val() != '') {
+			spendenbetrag = $('#spendenbetrag'+id).val();
+		} else {
+			alert('Kein Spendenbetrag eingegeben.');
+			return false;
+		}
+	}
+	var xhr = new XMLHttpRequest();
+	xhr.open('POST', '/functions/savesponsordata.php', true);
+	var fd = new FormData();
+	fd.append('id', id);
+	fd.append('sponsern', sponsern);
+	fd.append('sachpreise', sachpreise);
+	fd.append('spende', spende);
+	fd.append('ballheft', ballheft);
+	fd.append('format', format);
+	fd.append('flyer', flyer);
+	fd.append('verlinkung', verlinkung);
+	fd.append('betrag', betrag);
+	fd.append('sachpreis', sachpreis);
+	fd.append('spendenbetrag', spendenbetrag);
+	xhr.send(fd);
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			$('.status.'+id).html('<img src="/img/pending.png" />');
+			elem.parentNode.innerHTML = xhr.responseText;
+		}
+	};
+}
+
+function initFileUploader() {
+	$('.col.sachpreise').on('keyup', 'input', function(e) {
+		changeFields(this, e);
+	});
+	$('.col.sachpreise').on('focus', 'input', function(e) {
+		if (this.value == '') {
+			emptyInput = true;
+		} else {
+			emptyInput = false;
+		}
+	});
+	$('.submit').click(function() {
+		submitSponsorData(this);
+	});
+	$('.filedropper > span').click(function() {
+		$(this).toggleClass('clicked');
+		$(this).siblings('.info').slideToggle(200);
+	});
+	$('.colheading').click(function() {
+		var klasse = this.dataset.klasse;
+		$(this).toggleClass('clicked');
+		var disabled = ($(this).siblings('.'+klasse).hasClass('enabled')) ? true : false ;
+		$(this).siblings('.'+klasse).toggleClass('enabled').find('input, select').not('.format').attr('disabled', disabled);
+		this.dataset.enabled = !disabled;
+	});
+	$('.formatenabler').click(function() {
+		var disabled = ($(this).is(':checked') || $(this).siblings('.formatenabler').is(':checked')) ? false : true ;
+		$(this).siblings('.format').attr('disabled', disabled);
+		if (!disabled) {
+			$(this).siblings('.format').focus();
+		}
+	});
+	$('.upload').click(function (){
+		$(this).siblings('span').addClass('clicked');
+		$(this).siblings('.info').slideDown(200);
+	});
+	user = getSessionData('userid');
+	var selected = '';
+	fileselect = document.getElementsByClassName('selector');
+	filedropper = document.getElementsByClassName('filedropper');
+	uploadbutton = document.getElementsByClassName('upload');
+	// getElementById
+	function $id(id) {
+		return document.getElementById(id);
+	}
+	// call initialization file
+	if (window.File && window.FileList && window.FileReader) {
+		Init();
+	}
+	// initialize
+	function Init() {
+		for (i = 0; i < fileselect.length; i++) {
+			// file select
+			fileselect[i].addEventListener('change', FileSelectHandler, false);
+		}
+		for (x = 0; x < filedropper.length; x++) {
+			var xhr = new XMLHttpRequest();
+			// is XHR2 available?
+			if (xhr.upload) {
+				// file drop
+				filedropper[x].addEventListener('dragenter', FileDragHover, false);
+				filedropper[x].addEventListener('dragover', stopStandard, false);
+				filedropper[x].addEventListener('dragleave', FileDragHover, false);
+				filedropper[x].addEventListener('drop', FileSelectHandler, false);
+			}
+		}
+		for (k = 0; k < uploadbutton.length; k++) {
+			uploadbutton[k].addEventListener('click', clickFileHandler, false);
+		}
+	}
+
+	function clickFileHandler(e) {
+		e.target.getElementsByClassName('selector')[0].click();
+	}
+
+	function stopStandard(e) {
+		e.stopPropagation();
+		e.preventDefault();
+	}
+	
+	// file drag hover
+	function FileDragHover(e) {
+		// waere fuer hover-Effekt
+		$(e.target).parent('.filedropper').toggleClass('hover');
+	}
+	// file selection
+	function FileSelectHandler(e) {
+		// cancel event and hover styling
+		FileDragHover(e)
+		stopStandard(e);
+		// fetch FileList object
+		var files = e.target.files || e.dataTransfer.files;
+		// process all File objects
+		selected = (e.target.className != 'selector') ? $(e.target).parents('.filedropper').find('.upload')[0] : e.target.parentNode;
+		f = files[0];
+		UploadFile(f);
+	}
+	// for (i = 0; i < fileselect.length; i++) {
+		// fileselect[i].onclick = function() {
+			// selected = this;
+		// };
+	// }
+	// upload JPEG files
+	var prozent = 0;
+
+	// bei window.resize die Pixel der background-position aendern / vllt. mit loop
+
+	function UploadFile(file) {
+		var xhr = new XMLHttpRequest();
+		if (xhr.upload && file.type == 'application/pdf' && file.size <= 5000000) {
+			// create progress bar
+			var o = selected.parentNode;
+			var progress = o.appendChild(document.createElement('p'));
+			var progressspan = progress.appendChild(document.createElement('span'));
+			progressspan.appendChild(document.createTextNode('Datei wird hochgeladen... '));
+			progress.parentNode.firstChild.style.color = '#eee';
+			// progress bar
+			xhr.upload.addEventListener('progress', function(e) {
+				var pc = parseInt(100 - (e.loaded / e.total * 100));
+				prozent = pc;
+				var linewidth = progress.offsetWidth;
+				var pixel = linewidth / 100 * pc;
+				progress.style.backgroundPosition = '-'+pixel+'px, right';
+				if (pc == 0) {
+					progressspan.innerHTML = 'Datei wird bei Dropbox gespeichert...';
+				}
+			}, false);
+			// file received/failed
+			xhr.onreadystatechange = function(e) {
+				if (xhr.readyState == 4) {
+					// hier den Pling-Sound abspielen und Nachricht senden / CSS aendern von .success und .failure
+					progress.className = (xhr.status == 200 ? 'success' : 'failure');
+					progressspan.innerHTML = (xhr.status == 200 ? 'Die Datei wurde erfolgreich abgespeichert.' : 'Es gab ein Problem beim Hochladen.');
+					if (xhr.status = 200) {
+						playSound('sound1');
+						setTimeout(function() {progress.style.opacity = '0';}, 2000);
+						setTimeout(function() {progress.parentNode.firstChild.style.color = 'black'; progress.style.display = 'none';}, 3000);
+						$(o).find('#sider'+selected.lastChild.dataset.firmid)[0].innerHTML = '<a href="https://dl.dropboxusercontent.com/u/21062820/sponsoring/'+user+'/'+selected.lastChild.dataset.firmid+'.pdf">Dokument</a>';
+					}
+				}
+			};
+			// start upload
+			xhr.open("POST", '/functions/uploadFileDropbox.php', true);
+			xhr.setRequestHeader("X_FILENAME", file.name);
+			var fd = new FormData();
+			fd.append('file', file);
+			fd.append('directory', user);
+			fd.append('filename', selected.lastChild.dataset.firmid); // data-id reingeben und als 143.pdf speichern
+			xhr.send(fd);
+		}
+	}
 }
 
 $(function() {

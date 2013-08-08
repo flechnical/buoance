@@ -1,6 +1,5 @@
 <?php
 header('Content-type: text/html; charset=utf-8');
-include('comps/detectmobile.php');
 include('comps/usersession.php');
 ?>
 <!DOCTYPE html>
@@ -125,16 +124,10 @@ include('comps/usersession.php');
 				}
 			?>
 			
-			<div id="small">Fenster zu klein</div>
-			
 		</div>
 	</div>
 	
 	<img id="dragimage" src="/img/dragndrop.png" style="display: none;" />
-	<audio id="sound1">
-		<source src="https://dl.dropboxusercontent.com/u/21062820/media/success.mp3" type="audio/mp3" />
-		<source src="https://dl.dropboxusercontent.com/u/21062820/media/success.wav" type="audio/wav" />
-	</audio>
 	<script src="http://buoance_chat.jit.su/socket.io/socket.io.js"></script> <!-- online: http://buoance.eu01.aws.af.cm / lokal: http://localhost:8000 -->
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>

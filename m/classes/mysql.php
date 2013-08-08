@@ -32,11 +32,11 @@ class mysql{
 	
 	function getData($username) {
 		
-		$stmt = $this->conn->prepare("SELECT id, mail, avatar, kernteam, admin, bereich FROM students WHERE username = ?");
+		$stmt = $this->conn->prepare("SELECT id, mail, avatar, kernteam, admin FROM students WHERE username = ?");
 		$stmt->bind_param('s', $username);
 		$stmt->execute();
 		
-		$stmt->bind_result($id, $mail, $avatar, $kernteam, $admin, $bereich);
+		$stmt->bind_result($id, $mail, $avatar, $kernteam, $admin);
 		
 		while ($stmt->fetch()) {
 			$_SESSION['userid'] = $id;
@@ -44,7 +44,6 @@ class mysql{
 			$_SESSION['avatar'] = $avatar;
 			$_SESSION['kernteam'] = $kernteam;
 			$_SESSION['admin'] = $admin;
-			$_SESSION['bereich'] = $bereich;
 			if ($kernteam == '1' && $admin == '1') {
 				$_SESSION['userart'] = 'beides';
 			} else if ($kernteam == '1') {
